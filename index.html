@@ -1,19 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
- <script>
-    $( document ).ready(function() {
-	setTimeout(function() { 
-		$(location).attr("href", "https://apps.apple.com/us/app/honeys/id1662304621?mt=8");
-	}, 1500);
-    });
-    </script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>성남 로컬 맛집</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Pretendard', -apple-system, sans-serif; background: #f8f8f6; color: #1a1a1a; }
+  .hero { background: #fff; border-bottom: 0.5px solid #e0e0d8; padding: 2rem 1.5rem 1.5rem; text-align: center; }
+  .hero h1 { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
+  .hero p { font-size: 14px; color: #888; margin-top: 6px; }
+  .filter-bar { display: flex; gap: 8px; padding: 1rem 1.5rem; overflow-x: auto; background: #fff; border-bottom: 0.5px solid #e0e0d8; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .tag { font-size: 13px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid #d0d0c8; background: #fff; cursor: pointer; white-space: nowrap; color: #444; transition: all .15s; }
+  .tag.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  .layout { display: grid; grid-template-columns: 1fr; max-width: 900px; margin: 0 auto; padding: 1.5rem; gap: 1.5rem; }
+  @media(min-width:700px){ .layout { grid-template-columns: 1fr 1fr; } }
+  .map-wrap { border-radius: 12px; overflow: hidden; border: 0.5px solid #e0e0d8; background: #fff; }
+  .map-wrap iframe { display: block; width: 100%; height: 320px; border: none; }
+  .map-label { font-size: 13px; color: #888; padding: 10px 14px; border-top: 0.5px solid #f0f0e8; }
+  .cards { display: flex; flex-direction: column; gap: 12px; }
+  .card { background: #fff; border-radius: 12px; border: 0.5px solid #e0e0d8; overflow: hidden; cursor: pointer; transition: border-color .15s; }
+  .card:hover { border-color: #aaa; }
+  .card.selected { border: 1.5px solid #1a1a1a; }
+  .card-body { padding: 14px 16px; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .card-name { font-size: 15px; font-weight: 500; }
+  .card-cat { font-size: 12px; color: #888; margin-top: 2px; }
+  .stars { display: flex; gap: 3px; margin-top: 8px; }
+  .star { font-size: 18px; cursor: pointer; color: #ddd; transition: color .1s; line-height: 1; }
+  .star.filled { color: #f5a623; }
+  .avg-score { font-size: 13px; color: #888; margin-left: 6px; align-self: center; }
+  .card-addr { font-size: 12px; color: #999; margin-top: 6px; }
+  .comments-section { border-top: 0.5px solid #f0f0e8; padding: 10px 16px; background: #fafaf8; }
+  .comment-item { font-size: 13px; color: #555; padding: 6px 0; border-bottom: 0.5px solid #f0f0e8; }
+  .comment-item:last-child { border-bottom: none; }
+  .comment-meta { font-size: 11px; color: #aaa; margin-top: 2px; }
+  .comment-form { display: flex; gap: 8px; padding: 10px 16px; border-top: 0.5px solid #f0f0e8; }
+  .comment-form input { flex: 1; font-size: 13px; padding: 7px 10px; border: 0.5px solid #ddd; border-radius: 8px; background: #fff; color: #1a1a1a; outline: none; }
+  .comment-form input:focus { border-color: #888; }
+  .comment-form button { font-size: 13px; padding: 7px 14px; border-radius: 8px; border: 0.5px solid #d0d0c8; background: #1a1a1a; color: #fff; cursor: pointer; }
+  .badge { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: #f0f0e8; color: #666; }
+  .empty-comments { font-size: 13px; color: #bbb; padding: 8px 0; }
+</style>
 </head>
 <body>
-<h1>go to store</h1>
+
+<div class="hero">
+  <h1>성남 로컬 맛집 지도</h1>
+  <p>경기도 성남시 분당·수정·중원의 숨은 맛집을 소개합니다</p>
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <span class="tag active" data-cat="전체">전체</span>
+  <span class="tag" data-cat="한식">한식</span>
+  <span class="tag" data-cat="일식">일식</span>
+  <span class="tag" data-cat="중식">중식</span>
+  <span class="tag" data-cat="카페">카페</span>
+  <span class="tag" data-cat="분식">분식</span>
+  <span class="tag" data-cat="고기">고기</span>
+</div>
+
+<div class="layout">
+  <div>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25363.4!2d127.1265!3d37.4386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div class="map-label">경기도 성남시 일대 · 카드를 클릭하면 해당 위치를 확인할 수 있어요</div>
+    </div>
+  </div>
+
+  <div class="cards" id="cardList"></div>
+</div>
+
+<script>
+const places = [
+  { id:1, name:"판교 손칼국수", cat:"한식", addr:"분당구 판교역로 160", desc:"30년 전통의 직접 뽑는 손칼국수", lat:37.395, lng:127.111,
+    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.111!3d37.395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIzJzQyLjAiTiAxMjfCsDA2JzM5LjYiRQ!5e0!3m2!1sko!2skr!4v1" },
+  { id:2, name:"수내동 스시야", cat:"일식", addr:"분당구 수내동 18-3", desc:"20년 단골 가득한 동네 오마카세", lat:37.383, lng:127.122,
+    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.122!3d37.383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIyJzU4LjgiTiAxMjfCsDA3JzE5LjIiRQ!5e0!3m2!1sko!2skr!4v1" },
+  { id:3, name:"모란 양꼬치", cat:"고기", addr:"중원구 모란동 44-2", desc:"직화 양꼬치와 양갈비가 일품", lat:37.431, lng:127.129,
+    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.129!3d37.431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI1JzUxLjYiTiAxMjfCsDA3JzQ0LjQiRQ!5e0!3m2!1sko!2skr!4v1" },
+  { id:4, name:"정자동 마라탕", cat:"중식", addr:"분당구 정자동 178", desc:"진한 마라 육수, 국내산 식재료 사용", lat:37.362, lng:127.115,
+    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.115!3d37.362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIxJzQzLjIiTiAxMjfCsDA2JzU0LjAiRQ!5e0!3m2!1sko!2skr!4v1" },
+  { id:5, name:"서현 떡볶이 골목", cat:"분식", addr:"분당구 서현동 268", desc:"옛날 방식 그대로의 즉석 떡볶이", lat:37.384, lng:127.123,
+    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.123!3d37.384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIzJzAyLjQiTiAxMjfCsDA3JzIyLjgiRQ!5e0!3m2!1sko!2skr!4v1" },
+  { id:6, name:"미금 로스터리", cat:"카페", addr:"분당구 미금일로 123", desc:"스페셜티 원두 직접 로스팅, 조용한 공간", lat:37.370, lng:127.107,
+    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.107!3d37.370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIyJzEyLjAiTiAxMjfCsDA2JzI1LjIiRQ!5e0!3m2!1sko!2skr!4v1" },
+];
+
+const state = {
+  ratings: {},
+  comments: {},
+  selected: null,
+  filter: "전체",
+};
+places.forEach(p => { state.ratings[p.id] = 0; state.comments[p.id] = []; });
+
+const mapIframe = document.querySelector('.map-wrap iframe');
+
+function renderStars(pid, rating) {
+  return [1,2,3,4,5].map(i =>
+    `<span class="star ${i <= rating ? 'filled' : ''}" data-pid="${pid}" data-val="${i}">&#9733;</span>`
+  ).join('');
+}
+
+function avgRating(pid) {
+  return state.ratings[pid] || 0;
+}
+
+function renderCards() {
+  const list = document.getElementById('cardList');
+  const filtered = places.filter(p => state.filter === '전체' || p.cat === state.filter);
+  list.innerHTML = filtered.map(p => {
+    const r = avgRating(p.id);
+    const sel = state.selected === p.id;
+    const cmts = state.comments[p.id];
+    return `
+    <div class="card ${sel ? 'selected' : ''}" data-id="${p.id}">
+      <div class="card-body">
+        <div class="card-top">
+          <div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-cat">${p.desc}</div>
+          </div>
+          <span class="badge">${p.cat}</span>
+        </div>
+        <div class="stars" id="stars-${p.id}">
+          ${renderStars(p.id, r)}
+          <span class="avg-score">${r > 0 ? r.toFixed(1) : '평가없음'}</span>
+        </div>
+        <div class="card-addr">${p.addr}</div>
+      </div>
+      <div class="comments-section">
+        ${cmts.length === 0
+          ? `<div class="empty-comments">첫 번째 리플을 남겨보세요</div>`
+          : cmts.map(c => `<div class="comment-item">${c.text}<div class="comment-meta">${c.time}</div></div>`).join('')
+        }
+      </div>
+      <div class="comment-form">
+        <input type="text" id="input-${p.id}" placeholder="리플 남기기..." maxlength="80">
+        <button data-pid="${p.id}">등록</button>
+      </div>
+    </div>`;
+  }).join('');
+  bindEvents();
+}
+
+function bindEvents() {
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', e => {
+      const pid = parseInt(card.dataset.id);
+      if (e.target.classList.contains('star')) return;
+      if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
+      state.selected = state.selected === pid ? null : pid;
+      const place = places.find(p => p.id === pid);
+      if (state.selected && place) mapIframe.src = place.mapSrc;
+      renderCards();
+    });
+  });
+
+  document.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('click', e => {
+      e.stopPropagation();
+      const pid = parseInt(star.dataset.pid);
+      const val = parseInt(star.dataset.val);
+      state.ratings[pid] = val;
+      renderCards();
+    });
+  });
+
+  document.querySelectorAll('.comment-form button').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const pid = parseInt(btn.dataset.pid);
+      const inp = document.getElementById(`input-${pid}`);
+      const txt = inp.value.trim();
+      if (!txt) return;
+      const now = new Date();
+      const time = `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+      state.comments[pid].push({ text: txt, time });
+      inp.value = '';
+      renderCards();
+    });
+  });
+
+  document.querySelectorAll('.comment-form input').forEach(inp => {
+    inp.addEventListener('click', e => e.stopPropagation());
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const pid = parseInt(inp.id.replace('input-',''));
+        const txt = inp.value.trim();
+        if (!txt) return;
+        const now = new Date();
+        const time = `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+        state.comments[pid].push({ text: txt, time });
+        inp.value = '';
+        renderCards();
+      }
+    });
+  });
+}
+
+document.getElementById('filterBar').addEventListener('click', e => {
+  if (!e.target.classList.contains('tag')) return;
+  state.filter = e.target.dataset.cat;
+  document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  renderCards();
+});
+
+renderCards();
+</script>
 </body>
 </html>
