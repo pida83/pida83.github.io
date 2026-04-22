@@ -5,214 +5,531 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>성남 로컬 맛집</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Pretendard', -apple-system, sans-serif; background: #f8f8f6; color: #1a1a1a; }
-  .hero { background: #fff; border-bottom: 0.5px solid #e0e0d8; padding: 2rem 1.5rem 1.5rem; text-align: center; }
-  .hero h1 { font-size: 22px; font-weight: 500; letter-spacing: -0.3px; }
-  .hero p { font-size: 14px; color: #888; margin-top: 6px; }
-  .filter-bar { display: flex; gap: 8px; padding: 1rem 1.5rem; overflow-x: auto; background: #fff; border-bottom: 0.5px solid #e0e0d8; }
-  .filter-bar::-webkit-scrollbar { display: none; }
-  .tag { font-size: 13px; padding: 5px 14px; border-radius: 20px; border: 0.5px solid #d0d0c8; background: #fff; cursor: pointer; white-space: nowrap; color: #444; transition: all .15s; }
-  .tag.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
-  .layout { display: grid; grid-template-columns: 1fr; max-width: 900px; margin: 0 auto; padding: 1.5rem; gap: 1.5rem; }
-  @media(min-width:700px){ .layout { grid-template-columns: 1fr 1fr; } }
-  .map-wrap { border-radius: 12px; overflow: hidden; border: 0.5px solid #e0e0d8; background: #fff; }
-  .map-wrap iframe { display: block; width: 100%; height: 320px; border: none; }
-  .map-label { font-size: 13px; color: #888; padding: 10px 14px; border-top: 0.5px solid #f0f0e8; }
-  .cards { display: flex; flex-direction: column; gap: 12px; }
-  .card { background: #fff; border-radius: 12px; border: 0.5px solid #e0e0d8; overflow: hidden; cursor: pointer; transition: border-color .15s; }
-  .card:hover { border-color: #aaa; }
-  .card.selected { border: 1.5px solid #1a1a1a; }
-  .card-body { padding: 14px 16px; }
-  .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-  .card-name { font-size: 15px; font-weight: 500; }
-  .card-cat { font-size: 12px; color: #888; margin-top: 2px; }
-  .stars { display: flex; gap: 3px; margin-top: 8px; }
-  .star { font-size: 18px; cursor: pointer; color: #ddd; transition: color .1s; line-height: 1; }
-  .star.filled { color: #f5a623; }
-  .avg-score { font-size: 13px; color: #888; margin-left: 6px; align-self: center; }
-  .card-addr { font-size: 12px; color: #999; margin-top: 6px; }
-  .comments-section { border-top: 0.5px solid #f0f0e8; padding: 10px 16px; background: #fafaf8; }
-  .comment-item { font-size: 13px; color: #555; padding: 6px 0; border-bottom: 0.5px solid #f0f0e8; }
-  .comment-item:last-child { border-bottom: none; }
-  .comment-meta { font-size: 11px; color: #aaa; margin-top: 2px; }
-  .comment-form { display: flex; gap: 8px; padding: 10px 16px; border-top: 0.5px solid #f0f0e8; }
-  .comment-form input { flex: 1; font-size: 13px; padding: 7px 10px; border: 0.5px solid #ddd; border-radius: 8px; background: #fff; color: #1a1a1a; outline: none; }
-  .comment-form input:focus { border-color: #888; }
-  .comment-form button { font-size: 13px; padding: 7px 14px; border-radius: 8px; border: 0.5px solid #d0d0c8; background: #1a1a1a; color: #fff; cursor: pointer; }
-  .badge { font-size: 11px; padding: 3px 8px; border-radius: 6px; background: #f0f0e8; color: #666; }
-  .empty-comments { font-size: 13px; color: #bbb; padding: 8px 0; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,'Pretendard',sans-serif;background:#f7f7f5;color:#1a1a1a;font-size:14px}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{display:flex;gap:0;background:#fff;border-bottom:0.5px solid #e0e0d8;position:sticky;top:0;z-index:100}
+.nav-btn{flex:1;padding:14px 0;text-align:center;font-size:13px;color:#888;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.nav-btn.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
+
+/* HERO */
+.hero{background:#fff;padding:1.5rem;text-align:center;border-bottom:0.5px solid #e0e0d8}
+.hero h1{font-size:20px;font-weight:500}
+.hero p{font-size:13px;color:#999;margin-top:4px}
+
+/* AD BANNER */
+.ad-banner{background:#fff;border:0.5px solid #e8e8e0;margin:12px 16px;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.ad-label{font-size:10px;color:#aaa;border:0.5px solid #ddd;border-radius:4px;padding:1px 5px;flex-shrink:0}
+.ad-text{font-size:12px;color:#666;flex:1}
+.ad-cta{font-size:12px;color:#4a7cf5;flex-shrink:0;cursor:pointer}
+
+/* PAGES */
+.page{display:none;padding:0 0 80px}
+.page.active{display:block}
+
+/* FILTER */
+.filter-bar{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;background:#fff;border-bottom:0.5px solid #e0e0d8}
+.filter-bar::-webkit-scrollbar{display:none}
+.tag{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid #d8d8d0;background:#fff;cursor:pointer;white-space:nowrap;color:#555;transition:all .15s}
+.tag.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+/* LAYOUT */
+.two-col{display:grid;grid-template-columns:1fr;gap:12px;padding:12px 16px}
+@media(min-width:680px){.two-col{grid-template-columns:1fr 1fr}}
+
+/* MAP */
+.map-wrap{border-radius:12px;overflow:hidden;border:0.5px solid #e0e0d8;background:#fff}
+.map-wrap iframe{display:block;width:100%;height:300px;border:none}
+.map-label{font-size:12px;color:#aaa;padding:8px 12px;border-top:0.5px solid #f0f0e8}
+
+/* CARDS */
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{background:#fff;border-radius:12px;border:0.5px solid #e0e0d8;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.card:hover{border-color:#bbb}
+.card.selected{border:1.5px solid #1a1a1a}
+.card-body{padding:12px 14px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.card-name{font-size:14px;font-weight:500}
+.card-desc{font-size:12px;color:#999;margin-top:2px}
+.badge{font-size:11px;padding:3px 8px;border-radius:6px;background:#f2f2ec;color:#666;flex-shrink:0}
+.stars{display:flex;gap:2px;margin-top:8px;align-items:center}
+.star{font-size:16px;cursor:pointer;color:#e0e0e0;line-height:1;transition:color .1s}
+.star.filled{color:#f5a623}
+.avg{font-size:12px;color:#aaa;margin-left:4px}
+.card-addr{font-size:11px;color:#bbb;margin-top:4px}
+.comments-section{border-top:0.5px solid #f0f0e8;padding:8px 14px;background:#fafaf8}
+.comment-item{font-size:12px;color:#555;padding:5px 0;border-bottom:0.5px solid #f4f4f0}
+.comment-item:last-child{border-bottom:none}
+.comment-meta{font-size:10px;color:#ccc;margin-top:1px}
+.comment-form{display:flex;gap:8px;padding:8px 14px;border-top:0.5px solid #f0f0e8}
+.comment-form input{flex:1;font-size:12px;padding:6px 10px;border:0.5px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none}
+.comment-form input:focus{border-color:#999}
+.comment-form button{font-size:12px;padding:6px 12px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer}
+.empty-c{font-size:12px;color:#ccc;padding:6px 0}
+
+/* COURSE PAGE */
+.section-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 8px}
+.section-head h2{font-size:15px;font-weight:500}
+.btn-primary{font-size:12px;padding:7px 14px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer}
+.btn-outline{font-size:12px;padding:7px 14px;border-radius:8px;border:0.5px solid #d0d0c8;background:#fff;color:#444;cursor:pointer}
+
+.course-card{background:#fff;border-radius:12px;border:0.5px solid #e0e0d8;margin:0 16px 10px;overflow:hidden}
+.course-header{padding:12px 14px;cursor:pointer}
+.course-title{font-size:14px;font-weight:500}
+.course-meta{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.course-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:#f0f0e8;color:#777}
+.course-time{font-size:11px;color:#aaa}
+.course-body{border-top:0.5px solid #f0f0e8;padding:12px 14px;background:#fafaf8}
+.course-desc{font-size:12px;color:#666;line-height:1.6;margin-bottom:10px}
+.course-stops{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.stop-item{display:flex;align-items:center;gap:8px;font-size:12px}
+.stop-num{width:20px;height:20px;border-radius:50%;background:#1a1a1a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.tip-section{border-top:0.5px solid #eeeeea;padding-top:10px}
+.tip-label{font-size:12px;color:#888;margin-bottom:8px}
+.tip-amounts{display:flex;gap:6px;flex-wrap:wrap}
+.tip-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:0.5px solid #d8d8d0;background:#fff;color:#444;cursor:pointer;transition:all .15s}
+.tip-btn.selected{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.tip-confirm{margin-top:8px;display:none;gap:8px;align-items:center}
+.tip-confirm.show{display:flex}
+.tip-thanks{font-size:12px;color:#4a7cf5}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:flex-end;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:600px;padding:20px 20px 32px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:500;margin-bottom:16px}
+.form-group{margin-bottom:14px}
+.form-group label{font-size:12px;color:#888;display:block;margin-bottom:5px}
+.form-group input,.form-group textarea,.form-group select{width:100%;font-size:13px;padding:9px 12px;border:0.5px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none;font-family:inherit}
+.form-group textarea{resize:vertical;min-height:70px}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#999}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:6px}
+.check-item{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .15s}
+.check-item.checked{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.modal-footer{display:flex;gap:8px;margin-top:16px}
+.modal-footer button{flex:1}
+
+/* AD INLINE */
+.ad-inline{background:#fff;border:0.5px solid #e8e8e0;border-radius:10px;margin:0 16px 10px;padding:10px 14px;display:flex;align-items:center;gap:10px}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1>성남 로컬 맛집 지도</h1>
-  <p>경기도 성남시 분당·수정·중원의 숨은 맛집을 소개합니다</p>
+  <h1>성남 로컬 맛집</h1>
+  <p>분당·수정·중원의 숨은 맛집과 나만의 코스</p>
 </div>
 
-<div class="filter-bar" id="filterBar">
-  <span class="tag active" data-cat="전체">전체</span>
-  <span class="tag" data-cat="한식">한식</span>
-  <span class="tag" data-cat="일식">일식</span>
-  <span class="tag" data-cat="중식">중식</span>
-  <span class="tag" data-cat="카페">카페</span>
-  <span class="tag" data-cat="분식">분식</span>
-  <span class="tag" data-cat="고기">고기</span>
+<nav class="nav">
+  <div class="nav-btn active" data-page="map">맛집 지도</div>
+  <div class="nav-btn" data-page="course">코스 탐색</div>
+  <div class="nav-btn" data-page="register">코스 등록</div>
+</nav>
+
+<!-- ===== PAGE: MAP ===== -->
+<div class="page active" id="page-map">
+  <div class="ad-banner">
+    <span class="ad-label">AD</span>
+    <span class="ad-text">성남 맛집 배달 앱 — 지금 첫 주문 3,000원 할인</span>
+    <span class="ad-cta">보기 →</span>
+  </div>
+  <div class="filter-bar" id="filterBar">
+    <span class="tag active" data-cat="전체">전체</span>
+    <span class="tag" data-cat="한식">한식</span>
+    <span class="tag" data-cat="일식">일식</span>
+    <span class="tag" data-cat="중식">중식</span>
+    <span class="tag" data-cat="카페">카페</span>
+    <span class="tag" data-cat="분식">분식</span>
+    <span class="tag" data-cat="고기">고기</span>
+  </div>
+  <div class="two-col">
+    <div>
+      <div class="map-wrap">
+        <iframe id="mainMap"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25363!2d127.1265!3d37.4386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-label">카드 클릭 시 해당 위치로 이동해요</div>
+      </div>
+    </div>
+    <div class="cards" id="cardList"></div>
+  </div>
 </div>
 
-<div class="layout">
-  <div>
-    <div class="map-wrap">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25363.4!2d127.1265!3d37.4386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"
-        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-      <div class="map-label">경기도 성남시 일대 · 카드를 클릭하면 해당 위치를 확인할 수 있어요</div>
+<!-- ===== PAGE: COURSE ===== -->
+<div class="page" id="page-course">
+  <div class="ad-banner">
+    <span class="ad-label">AD</span>
+    <span class="ad-text">성남 근교 당일치기 투어 — 특가 예약 진행 중</span>
+    <span class="ad-cta">예약 →</span>
+  </div>
+  <div class="section-head">
+    <h2>추천 코스</h2>
+    <button class="btn-primary" id="goRegisterBtn">+ 코스 등록</button>
+  </div>
+  <div id="courseList"></div>
+</div>
+
+<!-- ===== PAGE: REGISTER ===== -->
+<div class="page" id="page-register">
+  <div class="section-head"><h2>나만의 코스 등록</h2></div>
+  <div style="padding:0 16px">
+    <div class="form-group">
+      <label>코스 이름</label>
+      <input type="text" id="reg-name" placeholder="예: 판교 반나절 힐링 코스">
+    </div>
+    <div class="form-group">
+      <label>포함 맛집 선택 (복수 선택 가능)</label>
+      <div class="checkbox-group" id="reg-places"></div>
+    </div>
+    <div class="form-group">
+      <label>코스 설명</label>
+      <textarea id="reg-desc" placeholder="어떤 분들께 추천하는 코스인지, 특별한 포인트 등을 자유롭게 써주세요"></textarea>
+    </div>
+    <div class="form-group">
+      <label>예상 소요 시간</label>
+      <select id="reg-time">
+        <option value="">선택해주세요</option>
+        <option>1시간 이내</option>
+        <option>1~2시간</option>
+        <option>2~3시간</option>
+        <option>3~4시간</option>
+        <option>반나절 (4~6시간)</option>
+        <option>하루 종일</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>태그</label>
+      <div class="checkbox-group" id="reg-tags">
+        <span class="check-item" data-tag="데이트">데이트</span>
+        <span class="check-item" data-tag="혼밥">혼밥</span>
+        <span class="check-item" data-tag="가족">가족</span>
+        <span class="check-item" data-tag="친구">친구</span>
+        <span class="check-item" data-tag="산책">산책</span>
+        <span class="check-item" data-tag="디저트">디저트</span>
+        <span class="check-item" data-tag="가성비">가성비</span>
+        <span class="check-item" data-tag="힐링">힐링</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;padding-bottom:20px">
+      <button class="btn-outline" style="flex:1" id="reg-cancel">취소</button>
+      <button class="btn-primary" style="flex:2" id="reg-submit">코스 등록하기</button>
     </div>
   </div>
+</div>
 
-  <div class="cards" id="cardList"></div>
+<!-- TIP MODAL -->
+<div class="modal-bg" id="tipModal">
+  <div class="modal">
+    <h3>이 코스가 도움이 됐나요?</h3>
+    <p style="font-size:13px;color:#888;margin-bottom:16px">크리에이터에게 커피 한 잔을 선물해보세요 ☕</p>
+    <div id="tipCourseName" style="font-size:14px;font-weight:500;margin-bottom:16px"></div>
+    <div class="tip-amounts" id="tipAmounts">
+      <span class="tip-btn" data-amount="1000">1,000원</span>
+      <span class="tip-btn" data-amount="2000">2,000원</span>
+      <span class="tip-btn" data-amount="3000">3,000원</span>
+      <span class="tip-btn" data-amount="5000">5,000원</span>
+      <span class="tip-btn" data-amount="10000">10,000원</span>
+    </div>
+    <div class="tip-confirm show" id="tipConfirmRow" style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn-outline" style="flex:1" id="tipCancel">취소</button>
+      <button class="btn-primary" style="flex:2" id="tipSend">선물하기</button>
+    </div>
+    <div id="tipSuccess" style="display:none;text-align:center;padding:16px 0">
+      <div style="font-size:28px;margin-bottom:8px">🎉</div>
+      <div style="font-size:14px;font-weight:500">감사합니다!</div>
+      <div style="font-size:12px;color:#aaa;margin-top:4px">크리에이터에게 전달되었어요</div>
+    </div>
+  </div>
 </div>
 
 <script>
 const places = [
-  { id:1, name:"판교 손칼국수", cat:"한식", addr:"분당구 판교역로 160", desc:"30년 전통의 직접 뽑는 손칼국수", lat:37.395, lng:127.111,
-    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.111!3d37.395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIzJzQyLjAiTiAxMjfCsDA2JzM5LjYiRQ!5e0!3m2!1sko!2skr!4v1" },
-  { id:2, name:"수내동 스시야", cat:"일식", addr:"분당구 수내동 18-3", desc:"20년 단골 가득한 동네 오마카세", lat:37.383, lng:127.122,
-    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.122!3d37.383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIyJzU4LjgiTiAxMjfCsDA3JzE5LjIiRQ!5e0!3m2!1sko!2skr!4v1" },
-  { id:3, name:"모란 양꼬치", cat:"고기", addr:"중원구 모란동 44-2", desc:"직화 양꼬치와 양갈비가 일품", lat:37.431, lng:127.129,
-    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.129!3d37.431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI1JzUxLjYiTiAxMjfCsDA3JzQ0LjQiRQ!5e0!3m2!1sko!2skr!4v1" },
-  { id:4, name:"정자동 마라탕", cat:"중식", addr:"분당구 정자동 178", desc:"진한 마라 육수, 국내산 식재료 사용", lat:37.362, lng:127.115,
-    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.115!3d37.362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIxJzQzLjIiTiAxMjfCsDA2JzU0LjAiRQ!5e0!3m2!1sko!2skr!4v1" },
-  { id:5, name:"서현 떡볶이 골목", cat:"분식", addr:"분당구 서현동 268", desc:"옛날 방식 그대로의 즉석 떡볶이", lat:37.384, lng:127.123,
-    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.123!3d37.384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIzJzAyLjQiTiAxMjfCsDA3JzIyLjgiRQ!5e0!3m2!1sko!2skr!4v1" },
-  { id:6, name:"미금 로스터리", cat:"카페", addr:"분당구 미금일로 123", desc:"스페셜티 원두 직접 로스팅, 조용한 공간", lat:37.370, lng:127.107,
-    mapSrc:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170!2d127.107!3d37.370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDIyJzEyLjAiTiAxMjfCsDA2JzI1LjIiRQ!5e0!3m2!1sko!2skr!4v1" },
+  {id:1,name:"판교 손칼국수",cat:"한식",addr:"분당구 판교역로 160",desc:"30년 전통 직접 뽑는 손칼국수",
+   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.111!3d37.395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:2,name:"수내동 스시야",cat:"일식",addr:"분당구 수내동 18-3",desc:"20년 단골 가득한 동네 오마카세",
+   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.122!3d37.383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:3,name:"모란 양꼬치",cat:"고기",addr:"중원구 모란동 44-2",desc:"직화 양꼬치와 양갈비가 일품",
+   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.129!3d37.431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:4,name:"정자동 마라탕",cat:"중식",addr:"분당구 정자동 178",desc:"진한 마라 육수, 국내산 식재료",
+   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.115!3d37.362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:5,name:"서현 떡볶이 골목",cat:"분식",addr:"분당구 서현동 268",desc:"옛날 방식 그대로 즉석 떡볶이",
+   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.123!3d37.384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:6,name:"미금 로스터리",cat:"카페",addr:"분당구 미금일로 123",desc:"스페셜티 원두 직접 로스팅",
+   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.107!3d37.370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
 ];
 
 const state = {
-  ratings: {},
-  comments: {},
-  selected: null,
-  filter: "전체",
+  ratings:{}, comments:{}, selected:null, filter:"전체",
+  courses:[
+    {id:1,name:"판교 반나절 힐링 코스",placeIds:[1,6],desc:"칼국수로 든든하게 배를 채우고, 미금 로스터리에서 스페셜티 커피 한 잔으로 마무리하는 여유로운 반나절 코스입니다.",time:"2~3시간",tags:["힐링","데이트"],tips:3200,open:false},
+    {id:2,name:"분당 디저트 & 산책",placeIds:[5,6,2],desc:"서현 떡볶이 골목에서 간식으로 시작해, 로스터리 카페에서 쉬고, 수내동 스시야 저녁으로 마무리하는 알찬 코스.",time:"반나절 (4~6시간)",tags:["디저트","산책","친구"],tips:7500,open:false},
+  ],
+  nextCourseId:3,
+  selectedTipAmount:null,
+  currentTipCourseId:null,
 };
-places.forEach(p => { state.ratings[p.id] = 0; state.comments[p.id] = []; });
+places.forEach(p=>{state.ratings[p.id]=0;state.comments[p.id]=[];});
 
-const mapIframe = document.querySelector('.map-wrap iframe');
+/* ---- PAGES ---- */
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('page-'+btn.dataset.page).classList.add('active');
+  });
+});
+document.getElementById('goRegisterBtn').addEventListener('click',()=>{
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelector('[data-page="register"]').classList.add('active');
+  document.getElementById('page-register').classList.add('active');
+});
 
-function renderStars(pid, rating) {
-  return [1,2,3,4,5].map(i =>
-    `<span class="star ${i <= rating ? 'filled' : ''}" data-pid="${pid}" data-val="${i}">&#9733;</span>`
-  ).join('');
-}
-
-function avgRating(pid) {
-  return state.ratings[pid] || 0;
-}
-
-function renderCards() {
-  const list = document.getElementById('cardList');
-  const filtered = places.filter(p => state.filter === '전체' || p.cat === state.filter);
-  list.innerHTML = filtered.map(p => {
-    const r = avgRating(p.id);
-    const sel = state.selected === p.id;
-    const cmts = state.comments[p.id];
-    return `
-    <div class="card ${sel ? 'selected' : ''}" data-id="${p.id}">
+/* ---- MAP PAGE ---- */
+function renderCards(){
+  const list=document.getElementById('cardList');
+  const filtered=places.filter(p=>state.filter==='전체'||p.cat===state.filter);
+  list.innerHTML=filtered.map(p=>{
+    const r=state.ratings[p.id];
+    const sel=state.selected===p.id;
+    const cmts=state.comments[p.id];
+    return`<div class="card ${sel?'selected':''}" data-id="${p.id}">
       <div class="card-body">
         <div class="card-top">
-          <div>
-            <div class="card-name">${p.name}</div>
-            <div class="card-cat">${p.desc}</div>
-          </div>
+          <div><div class="card-name">${p.name}</div><div class="card-desc">${p.desc}</div></div>
           <span class="badge">${p.cat}</span>
         </div>
         <div class="stars" id="stars-${p.id}">
-          ${renderStars(p.id, r)}
-          <span class="avg-score">${r > 0 ? r.toFixed(1) : '평가없음'}</span>
+          ${[1,2,3,4,5].map(i=>`<span class="star ${i<=r?'filled':''}" data-pid="${p.id}" data-val="${i}">★</span>`).join('')}
+          <span class="avg">${r>0?r.toFixed(1)+'점':'평가없음'}</span>
         </div>
         <div class="card-addr">${p.addr}</div>
       </div>
       <div class="comments-section">
-        ${cmts.length === 0
-          ? `<div class="empty-comments">첫 번째 리플을 남겨보세요</div>`
-          : cmts.map(c => `<div class="comment-item">${c.text}<div class="comment-meta">${c.time}</div></div>`).join('')
-        }
+        ${cmts.length===0?`<div class="empty-c">첫 번째 리플을 남겨보세요</div>`:cmts.map(c=>`<div class="comment-item">${c.text}<div class="comment-meta">${c.time}</div></div>`).join('')}
       </div>
       <div class="comment-form">
-        <input type="text" id="input-${p.id}" placeholder="리플 남기기..." maxlength="80">
+        <input type="text" id="inp-${p.id}" placeholder="리플 남기기..." maxlength="80">
         <button data-pid="${p.id}">등록</button>
       </div>
     </div>`;
   }).join('');
-  bindEvents();
+  bindCardEvents();
 }
-
-function bindEvents() {
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', e => {
-      const pid = parseInt(card.dataset.id);
-      if (e.target.classList.contains('star')) return;
-      if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
-      state.selected = state.selected === pid ? null : pid;
-      const place = places.find(p => p.id === pid);
-      if (state.selected && place) mapIframe.src = place.mapSrc;
-      renderCards();
-    });
-  });
-
-  document.querySelectorAll('.star').forEach(star => {
-    star.addEventListener('click', e => {
-      e.stopPropagation();
-      const pid = parseInt(star.dataset.pid);
-      const val = parseInt(star.dataset.val);
-      state.ratings[pid] = val;
-      renderCards();
-    });
-  });
-
-  document.querySelectorAll('.comment-form button').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const pid = parseInt(btn.dataset.pid);
-      const inp = document.getElementById(`input-${pid}`);
-      const txt = inp.value.trim();
-      if (!txt) return;
-      const now = new Date();
-      const time = `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-      state.comments[pid].push({ text: txt, time });
-      inp.value = '';
-      renderCards();
-    });
-  });
-
-  document.querySelectorAll('.comment-form input').forEach(inp => {
-    inp.addEventListener('click', e => e.stopPropagation());
-    inp.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        const pid = parseInt(inp.id.replace('input-',''));
-        const txt = inp.value.trim();
-        if (!txt) return;
-        const now = new Date();
-        const time = `${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-        state.comments[pid].push({ text: txt, time });
-        inp.value = '';
-        renderCards();
+function bindCardEvents(){
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click',e=>{
+      if(e.target.classList.contains('star'))return;
+      if(e.target.tagName==='BUTTON'||e.target.tagName==='INPUT')return;
+      const pid=parseInt(card.dataset.id);
+      state.selected=state.selected===pid?null:pid;
+      if(state.selected){
+        const p=places.find(x=>x.id===pid);
+        if(p)document.getElementById('mainMap').src=p.mapSrc;
       }
+      renderCards();
+    });
+  });
+  document.querySelectorAll('.star').forEach(s=>{
+    s.addEventListener('click',e=>{
+      e.stopPropagation();
+      state.ratings[parseInt(s.dataset.pid)]=parseInt(s.dataset.val);
+      renderCards();
+    });
+  });
+  document.querySelectorAll('.comment-form button').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const pid=parseInt(btn.dataset.pid);
+      const inp=document.getElementById('inp-'+pid);
+      const txt=inp.value.trim();
+      if(!txt)return;
+      const now=new Date();
+      state.comments[pid].push({text:txt,time:`${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`});
+      inp.value='';
+      renderCards();
+    });
+  });
+  document.querySelectorAll('.comment-form input').forEach(inp=>{
+    inp.addEventListener('click',e=>e.stopPropagation());
+    inp.addEventListener('keydown',e=>{
+      if(e.key!=='Enter')return;
+      const pid=parseInt(inp.id.replace('inp-',''));
+      const txt=inp.value.trim();
+      if(!txt)return;
+      const now=new Date();
+      state.comments[pid].push({text:txt,time:`${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`});
+      inp.value='';
+      renderCards();
     });
   });
 }
-
-document.getElementById('filterBar').addEventListener('click', e => {
-  if (!e.target.classList.contains('tag')) return;
-  state.filter = e.target.dataset.cat;
-  document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+document.getElementById('filterBar').addEventListener('click',e=>{
+  if(!e.target.classList.contains('tag'))return;
+  state.filter=e.target.dataset.cat;
+  document.querySelectorAll('.tag').forEach(t=>t.classList.remove('active'));
   e.target.classList.add('active');
   renderCards();
 });
 
+/* ---- COURSE PAGE ---- */
+function renderCourses(){
+  const list=document.getElementById('courseList');
+  if(state.courses.length===0){
+    list.innerHTML=`<div style="text-align:center;padding:40px 16px;color:#bbb;font-size:13px">아직 등록된 코스가 없어요<br>첫 번째 코스를 만들어보세요!</div>`;
+    return;
+  }
+  list.innerHTML='';
+  state.courses.forEach((c,ci)=>{
+    const stopNames=c.placeIds.map(id=>{const p=places.find(x=>x.id===id);return p?p.name:'알 수 없음';});
+    const el=document.createElement('div');
+    el.className='course-card';
+    el.innerHTML=`
+      <div class="course-header" data-ci="${ci}">
+        <div class="course-title">${c.name}</div>
+        <div class="course-meta">
+          ${c.tags.map(t=>`<span class="course-tag">${t}</span>`).join('')}
+          <span class="course-time">⏱ ${c.time}</span>
+          <span class="course-time">☕ 팁 ${c.tips.toLocaleString()}원</span>
+        </div>
+      </div>
+      ${c.open?`<div class="course-body">
+        <div class="course-desc">${c.desc}</div>
+        <div class="course-stops">
+          ${stopNames.map((n,i)=>`<div class="stop-item"><div class="stop-num">${i+1}</div><span>${n}</span></div>`).join('')}
+        </div>
+        <div class="tip-section">
+          <div class="tip-label">이 코스가 마음에 드셨나요? 크리에이터에게 팁을 보내보세요</div>
+          <div class="tip-amounts">
+            <span class="tip-btn" data-cid="${c.id}" data-amount="1000">1,000원</span>
+            <span class="tip-btn" data-cid="${c.id}" data-amount="2000">2,000원</span>
+            <span class="tip-btn" data-cid="${c.id}" data-amount="3000">3,000원</span>
+            <span class="tip-btn" data-cid="${c.id}" data-amount="5000">5,000원</span>
+            <span class="tip-btn" data-cid="${c.id}" data-amount="10000">10,000원</span>
+          </div>
+          <div style="margin-top:8px">
+            <button class="btn-primary tip-send-btn" data-cid="${c.id}" style="font-size:12px">선물하기</button>
+          </div>
+        </div>
+      </div>`:''}
+    `;
+    list.appendChild(el);
+
+    if(ci===1){
+      const ad=document.createElement('div');
+      ad.className='ad-inline';
+      ad.innerHTML=`<span class="ad-label">AD</span><span style="font-size:12px;color:#666;flex:1">성남 주변 숙소 — 오늘 특가 확인하기</span><span style="font-size:12px;color:#4a7cf5;cursor:pointer">보기 →</span>`;
+      list.appendChild(ad);
+    }
+  });
+  bindCourseEvents();
+}
+function bindCourseEvents(){
+  document.querySelectorAll('.course-header').forEach(h=>{
+    h.addEventListener('click',()=>{
+      const ci=parseInt(h.dataset.ci);
+      state.courses[ci].open=!state.courses[ci].open;
+      renderCourses();
+    });
+  });
+  document.querySelectorAll('.tip-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      document.querySelectorAll(`.tip-btn[data-cid="${btn.dataset.cid}"]`).forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+  });
+  document.querySelectorAll('.tip-send-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const cid=parseInt(btn.dataset.cid);
+      const selected=document.querySelector(`.tip-btn[data-cid="${cid}"].selected`);
+      if(!selected){alert('금액을 선택해주세요');return;}
+      const amount=parseInt(selected.dataset.amount);
+      state.currentTipCourseId=cid;
+      state.selectedTipAmount=amount;
+      const c=state.courses.find(x=>x.id===cid);
+      document.getElementById('tipCourseName').textContent=`"${c.name}"`;
+      document.getElementById('tipSuccess').style.display='none';
+      document.getElementById('tipConfirmRow').style.display='flex';
+      document.querySelectorAll('#tipAmounts .tip-btn').forEach(b=>{
+        b.classList.remove('selected');
+        if(parseInt(b.dataset.amount)===amount)b.classList.add('selected');
+      });
+      document.getElementById('tipModal').classList.add('show');
+    });
+  });
+}
+
+/* ---- TIP MODAL ---- */
+document.getElementById('tipCancel').addEventListener('click',()=>{
+  document.getElementById('tipModal').classList.remove('show');
+});
+document.querySelectorAll('#tipAmounts .tip-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#tipAmounts .tip-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.selectedTipAmount=parseInt(btn.dataset.amount);
+  });
+});
+document.getElementById('tipSend').addEventListener('click',()=>{
+  const amt=state.selectedTipAmount||document.querySelector('#tipAmounts .tip-btn.selected')?.dataset.amount;
+  if(!amt){alert('금액을 선택해주세요');return;}
+  const cid=state.currentTipCourseId;
+  const c=state.courses.find(x=>x.id===cid);
+  if(c)c.tips+=parseInt(amt);
+  document.getElementById('tipConfirmRow').style.display='none';
+  document.getElementById('tipSuccess').style.display='block';
+  setTimeout(()=>{
+    document.getElementById('tipModal').classList.remove('show');
+    renderCourses();
+  },1800);
+});
+
+/* ---- REGISTER PAGE ---- */
+function initRegister(){
+  const pg=document.getElementById('reg-places');
+  pg.innerHTML=places.map(p=>`<span class="check-item" data-pid="${p.id}">${p.name}</span>`).join('');
+  document.querySelectorAll('#reg-places .check-item').forEach(item=>{
+    item.addEventListener('click',()=>item.classList.toggle('checked'));
+  });
+  document.querySelectorAll('#reg-tags .check-item').forEach(item=>{
+    item.addEventListener('click',()=>item.classList.toggle('checked'));
+  });
+}
+document.getElementById('reg-submit').addEventListener('click',()=>{
+  const name=document.getElementById('reg-name').value.trim();
+  const desc=document.getElementById('reg-desc').value.trim();
+  const time=document.getElementById('reg-time').value;
+  const placeIds=[...document.querySelectorAll('#reg-places .check-item.checked')].map(el=>parseInt(el.dataset.pid));
+  const tags=[...document.querySelectorAll('#reg-tags .check-item.checked')].map(el=>el.dataset.tag);
+  if(!name||!desc||!time||placeIds.length===0){alert('모든 항목을 입력해주세요 (맛집 1개 이상 선택 필수)');return;}
+  state.courses.unshift({id:state.nextCourseId++,name,placeIds,desc,time,tags,tips:0,open:false});
+  document.getElementById('reg-name').value='';
+  document.getElementById('reg-desc').value='';
+  document.getElementById('reg-time').value='';
+  document.querySelectorAll('#reg-places .check-item').forEach(el=>el.classList.remove('checked'));
+  document.querySelectorAll('#reg-tags .check-item').forEach(el=>el.classList.remove('checked'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelector('[data-page="course"]').classList.add('active');
+  document.getElementById('page-course').classList.add('active');
+  renderCourses();
+  alert('코스가 등록되었어요!');
+});
+document.getElementById('reg-cancel').addEventListener('click',()=>{
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelector('[data-page="course"]').classList.add('active');
+  document.getElementById('page-course').classList.add('active');
+});
+
 renderCards();
+renderCourses();
+initRegister();
 </script>
 </body>
 </html>
