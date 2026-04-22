@@ -7,44 +7,35 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,'Pretendard',sans-serif;background:#f7f7f5;color:#1a1a1a;font-size:14px}
-a{color:inherit;text-decoration:none}
 
-/* NAV */
-.nav{display:flex;gap:0;background:#fff;border-bottom:0.5px solid #e0e0d8;position:sticky;top:0;z-index:100}
+.nav{display:flex;background:#fff;border-bottom:0.5px solid #e0e0d8;position:sticky;top:0;z-index:100}
 .nav-btn{flex:1;padding:14px 0;text-align:center;font-size:13px;color:#888;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
 .nav-btn.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
 
-/* HERO */
 .hero{background:#fff;padding:1.5rem;text-align:center;border-bottom:0.5px solid #e0e0d8}
 .hero h1{font-size:20px;font-weight:500}
 .hero p{font-size:13px;color:#999;margin-top:4px}
 
-/* AD BANNER */
 .ad-banner{background:#fff;border:0.5px solid #e8e8e0;margin:12px 16px;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px}
 .ad-label{font-size:10px;color:#aaa;border:0.5px solid #ddd;border-radius:4px;padding:1px 5px;flex-shrink:0}
 .ad-text{font-size:12px;color:#666;flex:1}
-.ad-cta{font-size:12px;color:#4a7cf5;flex-shrink:0;cursor:pointer}
+.ad-cta{font-size:12px;color:#4a7cf5;cursor:pointer}
 
-/* PAGES */
 .page{display:none;padding:0 0 80px}
 .page.active{display:block}
 
-/* FILTER */
 .filter-bar{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;background:#fff;border-bottom:0.5px solid #e0e0d8}
 .filter-bar::-webkit-scrollbar{display:none}
 .tag{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid #d8d8d0;background:#fff;cursor:pointer;white-space:nowrap;color:#555;transition:all .15s}
 .tag.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 
-/* LAYOUT */
 .two-col{display:grid;grid-template-columns:1fr;gap:12px;padding:12px 16px}
 @media(min-width:680px){.two-col{grid-template-columns:1fr 1fr}}
 
-/* MAP */
 .map-wrap{border-radius:12px;overflow:hidden;border:0.5px solid #e0e0d8;background:#fff}
 .map-wrap iframe{display:block;width:100%;height:300px;border:none}
 .map-label{font-size:12px;color:#aaa;padding:8px 12px;border-top:0.5px solid #f0f0e8}
 
-/* CARDS */
 .cards{display:flex;flex-direction:column;gap:10px}
 .card{background:#fff;border-radius:12px;border:0.5px solid #e0e0d8;overflow:hidden;cursor:pointer;transition:border-color .15s}
 .card:hover{border-color:#bbb}
@@ -55,7 +46,7 @@ a{color:inherit;text-decoration:none}
 .card-desc{font-size:12px;color:#999;margin-top:2px}
 .badge{font-size:11px;padding:3px 8px;border-radius:6px;background:#f2f2ec;color:#666;flex-shrink:0}
 .stars{display:flex;gap:2px;margin-top:8px;align-items:center}
-.star{font-size:16px;cursor:pointer;color:#e0e0e0;line-height:1;transition:color .1s}
+.star{font-size:16px;cursor:pointer;color:#e0e0e0;line-height:1}
 .star.filled{color:#f5a623}
 .avg{font-size:12px;color:#aaa;margin-left:4px}
 .card-addr{font-size:11px;color:#bbb;margin-top:4px}
@@ -69,18 +60,32 @@ a{color:inherit;text-decoration:none}
 .comment-form button{font-size:12px;padding:6px 12px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer}
 .empty-c{font-size:12px;color:#ccc;padding:6px 0}
 
-/* COURSE PAGE */
 .section-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 8px}
 .section-head h2{font-size:15px;font-weight:500}
 .btn-primary{font-size:12px;padding:7px 14px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer}
 .btn-outline{font-size:12px;padding:7px 14px;border-radius:8px;border:0.5px solid #d0d0c8;background:#fff;color:#444;cursor:pointer}
+.btn-sm{font-size:11px;padding:5px 10px;border-radius:7px;border:0.5px solid #d8d8d0;background:#fff;color:#555;cursor:pointer}
 
+/* COURSE CARD */
 .course-card{background:#fff;border-radius:12px;border:0.5px solid #e0e0d8;margin:0 16px 10px;overflow:hidden}
-.course-header{padding:12px 14px;cursor:pointer}
+.course-header{padding:12px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start}
 .course-title{font-size:14px;font-weight:500}
-.course-meta{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;align-items:center}
+.course-meta{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;align-items:center}
 .course-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:#f0f0e8;color:#777}
 .course-time{font-size:11px;color:#aaa}
+.chevron{font-size:11px;color:#ccc;margin-left:8px;transition:transform .2s;flex-shrink:0;margin-top:2px}
+.chevron.open{transform:rotate(180deg)}
+
+/* MEDIA STRIP (코스 탐색) */
+.media-strip{padding:0 14px 12px}
+.media-strip-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.media-strip-scroll::-webkit-scrollbar{display:none}
+.media-thumb-strip{flex-shrink:0;width:100px;height:76px;border-radius:8px;overflow:hidden;position:relative;border:0.5px solid #e8e8e0;cursor:pointer}
+.media-thumb-strip img,.media-thumb-strip video{width:100%;height:100%;object-fit:cover;display:block}
+.video-badge{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.5);color:#fff;font-size:9px;border-radius:3px;padding:1px 5px}
+.media-more-badge{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:500}
+
+/* COURSE BODY */
 .course-body{border-top:0.5px solid #f0f0e8;padding:12px 14px;background:#fafaf8}
 .course-desc{font-size:12px;color:#666;line-height:1.6;margin-bottom:10px}
 .course-stops{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
@@ -91,28 +96,58 @@ a{color:inherit;text-decoration:none}
 .tip-amounts{display:flex;gap:6px;flex-wrap:wrap}
 .tip-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:0.5px solid #d8d8d0;background:#fff;color:#444;cursor:pointer;transition:all .15s}
 .tip-btn.selected{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-.tip-confirm{margin-top:8px;display:none;gap:8px;align-items:center}
-.tip-confirm.show{display:flex}
-.tip-thanks{font-size:12px;color:#4a7cf5}
 
-/* MODAL */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:flex-end;justify-content:center}
-.modal-bg.show{display:flex}
-.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:600px;padding:20px 20px 32px;max-height:90vh;overflow-y:auto}
-.modal h3{font-size:16px;font-weight:500;margin-bottom:16px}
+/* ── REGISTER PAGE ── */
+.reg-wrap{padding:0 16px 32px}
 .form-group{margin-bottom:14px}
 .form-group label{font-size:12px;color:#888;display:block;margin-bottom:5px}
 .form-group input,.form-group textarea,.form-group select{width:100%;font-size:13px;padding:9px 12px;border:0.5px solid #ddd;border-radius:8px;background:#fff;color:#1a1a1a;outline:none;font-family:inherit}
 .form-group textarea{resize:vertical;min-height:70px}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#999}
 .checkbox-group{display:flex;flex-wrap:wrap;gap:6px}
-.check-item{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .15s}
+.check-item{font-size:12px;padding:5px 10px;border:0.5px solid #ddd;border-radius:8px;cursor:pointer;background:#fff;transition:all .15s}
 .check-item.checked{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+/* MEDIA UPLOAD ZONE (등록 페이지) */
+.upload-zone{border:1.5px dashed #d0d0c8;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:background .15s;background:#fafaf8}
+.upload-zone:hover{background:#f2f2ee}
+.upload-zone-icon{font-size:28px;margin-bottom:6px}
+.upload-zone-label{font-size:13px;color:#666;margin-bottom:4px}
+.upload-zone-sub{font-size:11px;color:#bbb}
+.upload-type-btns{display:flex;gap:8px;margin-top:12px;justify-content:center}
+
+.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.preview-item{border-radius:8px;overflow:hidden;position:relative;aspect-ratio:1;background:#f0f0e8;border:0.5px solid #e8e8e0}
+.preview-item img,.preview-item video{width:100%;height:100%;object-fit:cover;display:block}
+.preview-del{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.45);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.preview-type-badge{position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,0.5);color:#fff;font-size:9px;border-radius:3px;padding:1px 5px}
+
+/* PROGRESS */
+.upload-progress{background:#f8f8f6;border-radius:8px;padding:10px 12px;margin-top:8px;display:flex;align-items:center;gap:10px}
+.prog-info{flex:1}
+.prog-name{font-size:12px;font-weight:500;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-bar-wrap{height:4px;background:#e8e8e0;border-radius:2px;overflow:hidden}
+.prog-bar{height:100%;background:#1a1a1a;border-radius:2px;transition:width .25s}
+.prog-pct{font-size:11px;color:#aaa;flex-shrink:0}
+
+/* TIP MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;align-items:flex-end;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:600px;padding:20px 20px 32px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:16px;font-weight:500;margin-bottom:16px}
 .modal-footer{display:flex;gap:8px;margin-top:16px}
 .modal-footer button{flex:1}
 
-/* AD INLINE */
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:75vh;border-radius:8px;object-fit:contain}
+.lb-video{width:92vw;max-width:480px;border-radius:8px;background:#000}
+.lb-close{color:#fff;font-size:13px;padding:8px 20px;border:0.5px solid rgba(255,255,255,0.3);border-radius:8px;cursor:pointer;background:transparent}
+.lb-cap{color:rgba(255,255,255,0.5);font-size:12px}
+
 .ad-inline{background:#fff;border:0.5px solid #e8e8e0;border-radius:10px;margin:0 16px 10px;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.file-input{display:none}
 </style>
 </head>
 <body>
@@ -121,35 +156,25 @@ a{color:inherit;text-decoration:none}
   <h1>성남 로컬 맛집</h1>
   <p>분당·수정·중원의 숨은 맛집과 나만의 코스</p>
 </div>
-
 <nav class="nav">
   <div class="nav-btn active" data-page="map">맛집 지도</div>
   <div class="nav-btn" data-page="course">코스 탐색</div>
   <div class="nav-btn" data-page="register">코스 등록</div>
 </nav>
 
-<!-- ===== PAGE: MAP ===== -->
+<!-- MAP -->
 <div class="page active" id="page-map">
-  <div class="ad-banner">
-    <span class="ad-label">AD</span>
-    <span class="ad-text">성남 맛집 배달 앱 — 지금 첫 주문 3,000원 할인</span>
-    <span class="ad-cta">보기 →</span>
-  </div>
+  <div class="ad-banner"><span class="ad-label">AD</span><span class="ad-text">성남 맛집 배달 앱 — 첫 주문 3,000원 할인</span><span class="ad-cta">보기 →</span></div>
   <div class="filter-bar" id="filterBar">
     <span class="tag active" data-cat="전체">전체</span>
-    <span class="tag" data-cat="한식">한식</span>
-    <span class="tag" data-cat="일식">일식</span>
-    <span class="tag" data-cat="중식">중식</span>
-    <span class="tag" data-cat="카페">카페</span>
-    <span class="tag" data-cat="분식">분식</span>
-    <span class="tag" data-cat="고기">고기</span>
+    <span class="tag" data-cat="한식">한식</span><span class="tag" data-cat="일식">일식</span>
+    <span class="tag" data-cat="중식">중식</span><span class="tag" data-cat="카페">카페</span>
+    <span class="tag" data-cat="분식">분식</span><span class="tag" data-cat="고기">고기</span>
   </div>
   <div class="two-col">
     <div>
       <div class="map-wrap">
-        <iframe id="mainMap"
-          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25363!2d127.1265!3d37.4386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"
-          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe id="mainMap" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25363!2d127.1265!3d37.4386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <div class="map-label">카드 클릭 시 해당 위치로 이동해요</div>
       </div>
     </div>
@@ -157,62 +182,49 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
-<!-- ===== PAGE: COURSE ===== -->
+<!-- COURSE -->
 <div class="page" id="page-course">
-  <div class="ad-banner">
-    <span class="ad-label">AD</span>
-    <span class="ad-text">성남 근교 당일치기 투어 — 특가 예약 진행 중</span>
-    <span class="ad-cta">예약 →</span>
-  </div>
-  <div class="section-head">
-    <h2>추천 코스</h2>
-    <button class="btn-primary" id="goRegisterBtn">+ 코스 등록</button>
-  </div>
+  <div class="ad-banner"><span class="ad-label">AD</span><span class="ad-text">성남 근교 당일치기 투어 — 특가 예약 진행 중</span><span class="ad-cta">예약 →</span></div>
+  <div class="section-head"><h2>추천 코스</h2><button class="btn-primary" id="goRegisterBtn">+ 코스 등록</button></div>
   <div id="courseList"></div>
 </div>
 
-<!-- ===== PAGE: REGISTER ===== -->
+<!-- REGISTER -->
 <div class="page" id="page-register">
   <div class="section-head"><h2>나만의 코스 등록</h2></div>
-  <div style="padding:0 16px">
-    <div class="form-group">
-      <label>코스 이름</label>
-      <input type="text" id="reg-name" placeholder="예: 판교 반나절 힐링 코스">
+  <div class="reg-wrap">
+    <div class="form-group"><label>코스 이름</label><input type="text" id="reg-name" placeholder="예: 판교 반나절 힐링 코스"></div>
+    <div class="form-group"><label>포함 맛집 선택 (복수 가능)</label><div class="checkbox-group" id="reg-places"></div></div>
+    <div class="form-group"><label>코스 설명</label><textarea id="reg-desc" placeholder="어떤 분들께 추천하는지, 특별한 포인트 등을 자유롭게 써주세요"></textarea></div>
+    <div class="form-group"><label>예상 소요 시간</label>
+      <select id="reg-time"><option value="">선택해주세요</option><option>1시간 이내</option><option>1~2시간</option><option>2~3시간</option><option>3~4시간</option><option>반나절 (4~6시간)</option><option>하루 종일</option></select>
     </div>
-    <div class="form-group">
-      <label>포함 맛집 선택 (복수 선택 가능)</label>
-      <div class="checkbox-group" id="reg-places"></div>
-    </div>
-    <div class="form-group">
-      <label>코스 설명</label>
-      <textarea id="reg-desc" placeholder="어떤 분들께 추천하는 코스인지, 특별한 포인트 등을 자유롭게 써주세요"></textarea>
-    </div>
-    <div class="form-group">
-      <label>예상 소요 시간</label>
-      <select id="reg-time">
-        <option value="">선택해주세요</option>
-        <option>1시간 이내</option>
-        <option>1~2시간</option>
-        <option>2~3시간</option>
-        <option>3~4시간</option>
-        <option>반나절 (4~6시간)</option>
-        <option>하루 종일</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>태그</label>
+    <div class="form-group"><label>태그</label>
       <div class="checkbox-group" id="reg-tags">
-        <span class="check-item" data-tag="데이트">데이트</span>
-        <span class="check-item" data-tag="혼밥">혼밥</span>
-        <span class="check-item" data-tag="가족">가족</span>
-        <span class="check-item" data-tag="친구">친구</span>
-        <span class="check-item" data-tag="산책">산책</span>
-        <span class="check-item" data-tag="디저트">디저트</span>
-        <span class="check-item" data-tag="가성비">가성비</span>
-        <span class="check-item" data-tag="힐링">힐링</span>
+        <span class="check-item" data-tag="데이트">데이트</span><span class="check-item" data-tag="혼밥">혼밥</span>
+        <span class="check-item" data-tag="가족">가족</span><span class="check-item" data-tag="친구">친구</span>
+        <span class="check-item" data-tag="산책">산책</span><span class="check-item" data-tag="디저트">디저트</span>
+        <span class="check-item" data-tag="가성비">가성비</span><span class="check-item" data-tag="힐링">힐링</span>
       </div>
     </div>
-    <div style="display:flex;gap:8px;padding-bottom:20px">
+
+    <!-- 미디어 업로드 -->
+    <div class="form-group">
+      <label>사진 · 동영상 <span style="color:#bbb;font-weight:400">(선택)</span></label>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-zone-icon">📷</div>
+        <div class="upload-zone-label">여기를 클릭하거나 파일을 드래그하세요</div>
+        <div class="upload-zone-sub">JPG, PNG, GIF, MP4, MOV · 최대 10개</div>
+        <div class="upload-type-btns">
+          <button class="btn-outline" id="addPhotoBtn" style="font-size:12px">사진 선택</button>
+          <button class="btn-outline" id="addVideoBtn" style="font-size:12px">동영상 선택</button>
+        </div>
+      </div>
+      <div id="progContainer"></div>
+      <div class="preview-grid" id="previewGrid"></div>
+    </div>
+
+    <div style="display:flex;gap:8px">
       <button class="btn-outline" style="flex:1" id="reg-cancel">취소</button>
       <button class="btn-primary" style="flex:2" id="reg-submit">코스 등록하기</button>
     </div>
@@ -232,10 +244,7 @@ a{color:inherit;text-decoration:none}
       <span class="tip-btn" data-amount="5000">5,000원</span>
       <span class="tip-btn" data-amount="10000">10,000원</span>
     </div>
-    <div class="tip-confirm show" id="tipConfirmRow" style="margin-top:12px;display:flex;gap:8px">
-      <button class="btn-outline" style="flex:1" id="tipCancel">취소</button>
-      <button class="btn-primary" style="flex:2" id="tipSend">선물하기</button>
-    </div>
+    <div class="modal-footer"><button class="btn-outline" id="tipCancel">취소</button><button class="btn-primary" id="tipSend">선물하기</button></div>
     <div id="tipSuccess" style="display:none;text-align:center;padding:16px 0">
       <div style="font-size:28px;margin-bottom:8px">🎉</div>
       <div style="font-size:14px;font-weight:500">감사합니다!</div>
@@ -244,261 +253,319 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div id="lbContent"></div>
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-close" id="lbClose">닫기</div>
+</div>
+
+<input type="file" id="filePhoto" class="file-input" accept="image/*" multiple>
+<input type="file" id="fileVideo" class="file-input" accept="video/*" multiple>
+
 <script>
-const places = [
-  {id:1,name:"판교 손칼국수",cat:"한식",addr:"분당구 판교역로 160",desc:"30년 전통 직접 뽑는 손칼국수",
-   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.111!3d37.395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
-  {id:2,name:"수내동 스시야",cat:"일식",addr:"분당구 수내동 18-3",desc:"20년 단골 가득한 동네 오마카세",
-   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.122!3d37.383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
-  {id:3,name:"모란 양꼬치",cat:"고기",addr:"중원구 모란동 44-2",desc:"직화 양꼬치와 양갈비가 일품",
-   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.129!3d37.431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
-  {id:4,name:"정자동 마라탕",cat:"중식",addr:"분당구 정자동 178",desc:"진한 마라 육수, 국내산 식재료",
-   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.115!3d37.362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
-  {id:5,name:"서현 떡볶이 골목",cat:"분식",addr:"분당구 서현동 268",desc:"옛날 방식 그대로 즉석 떡볶이",
-   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.123!3d37.384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
-  {id:6,name:"미금 로스터리",cat:"카페",addr:"분당구 미금일로 123",desc:"스페셜티 원두 직접 로스팅",
-   mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.107!3d37.370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+const DUMMY_COLORS=['#e8d5c4','#c4d5e8','#d5e8c4','#e8c4d5','#d5c4e8','#e8e4c4'];
+const DUMMY_LABELS=['🍜 칼국수 골목','☕ 카페거리','🌿 산책로','🍣 스시 타임','🌸 벚꽃길','🍡 디저트 투어'];
+
+const places=[
+  {id:1,name:"판교 손칼국수",cat:"한식",addr:"분당구 판교역로 160",desc:"30년 전통 직접 뽑는 손칼국수",mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.111!3d37.395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:2,name:"수내동 스시야",cat:"일식",addr:"분당구 수내동 18-3",desc:"20년 단골 가득한 동네 오마카세",mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.122!3d37.383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:3,name:"모란 양꼬치",cat:"고기",addr:"중원구 모란동 44-2",desc:"직화 양꼬치와 양갈비가 일품",mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.129!3d37.431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:4,name:"정자동 마라탕",cat:"중식",addr:"분당구 정자동 178",desc:"진한 마라 육수, 국내산 식재료",mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.115!3d37.362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:5,name:"서현 떡볶이 골목",cat:"분식",addr:"분당구 서현동 268",desc:"옛날 방식 그대로 즉석 떡볶이",mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.123!3d37.384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
+  {id:6,name:"미금 로스터리",cat:"카페",addr:"분당구 미금일로 123",desc:"스페셜티 원두 직접 로스팅",mapSrc:"https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3170!2d127.107!3d37.370!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1"},
 ];
 
-const state = {
-  ratings:{}, comments:{}, selected:null, filter:"전체",
+// 더미 미디어 생성 (canvas → dataURL)
+function makeDummyCanvas(color, label, w=200, h=150){
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  const ctx=c.getContext('2d');
+  ctx.fillStyle=color;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(0,0,0,0.15)';
+  for(let i=0;i<6;i++){ctx.fillRect(0,i*(h/6),w,1);}
+  ctx.fillStyle='rgba(0,0,0,0.55)';ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(label,w/2,h/2);
+  return c.toDataURL();
+}
+
+const dummyMedia=[
+  {url:makeDummyCanvas(DUMMY_COLORS[0],DUMMY_LABELS[0]),name:'골목풍경.jpg',type:'photo'},
+  {url:makeDummyCanvas(DUMMY_COLORS[1],DUMMY_LABELS[1]),name:'카페거리.jpg',type:'photo'},
+  {url:makeDummyCanvas(DUMMY_COLORS[2],DUMMY_LABELS[2]),name:'산책로.jpg',type:'photo'},
+  {url:null,name:'코스영상.mp4',type:'video'},
+];
+const dummyMedia2=[
+  {url:makeDummyCanvas(DUMMY_COLORS[3],DUMMY_LABELS[3]),name:'스시타임.jpg',type:'photo'},
+  {url:makeDummyCanvas(DUMMY_COLORS[4],DUMMY_LABELS[4]),name:'벚꽃길.jpg',type:'photo'},
+  {url:makeDummyCanvas(DUMMY_COLORS[5],DUMMY_LABELS[5]),name:'디저트.jpg',type:'photo'},
+  {url:null,name:'분당산책.mp4',type:'video'},
+  {url:makeDummyCanvas(DUMMY_COLORS[0],DUMMY_LABELS[0]),name:'저녁거리.jpg',type:'photo'},
+];
+
+const state={
+  ratings:{},comments:{},selected:null,filter:'전체',
   courses:[
-    {id:1,name:"판교 반나절 힐링 코스",placeIds:[1,6],desc:"칼국수로 든든하게 배를 채우고, 미금 로스터리에서 스페셜티 커피 한 잔으로 마무리하는 여유로운 반나절 코스입니다.",time:"2~3시간",tags:["힐링","데이트"],tips:3200,open:false},
-    {id:2,name:"분당 디저트 & 산책",placeIds:[5,6,2],desc:"서현 떡볶이 골목에서 간식으로 시작해, 로스터리 카페에서 쉬고, 수내동 스시야 저녁으로 마무리하는 알찬 코스.",time:"반나절 (4~6시간)",tags:["디저트","산책","친구"],tips:7500,open:false},
+    {id:1,name:'판교 반나절 힐링 코스',placeIds:[1,6],desc:'칼국수로 든든하게 배를 채우고, 미금 로스터리에서 스페셜티 커피 한 잔으로 마무리하는 여유로운 반나절 코스입니다.',time:'2~3시간',tags:['힐링','데이트'],tips:3200,open:false,media:dummyMedia},
+    {id:2,name:'분당 디저트 & 산책',placeIds:[5,6,2],desc:'서현 떡볶이 골목에서 간식으로 시작해, 로스터리 카페에서 쉬고, 수내동 스시야 저녁으로 마무리하는 알찬 코스.',time:'반나절 (4~6시간)',tags:['디저트','산책','친구'],tips:7500,open:false,media:dummyMedia2},
   ],
-  nextCourseId:3,
-  selectedTipAmount:null,
-  currentTipCourseId:null,
+  nextId:3,
+  regMedia:[],
+  tipCid:null,tipAmt:null,
 };
 places.forEach(p=>{state.ratings[p.id]=0;state.comments[p.id]=[];});
 
-/* ---- PAGES ---- */
-document.querySelectorAll('.nav-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('page-'+btn.dataset.page).classList.add('active');
-  });
-});
-document.getElementById('goRegisterBtn').addEventListener('click',()=>{
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelector('[data-page="register"]').classList.add('active');
-  document.getElementById('page-register').classList.add('active');
-});
+/* ── NAV ── */
+function goPage(name){
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
+}
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>goPage(b.dataset.page)));
+document.getElementById('goRegisterBtn').addEventListener('click',()=>goPage('register'));
 
-/* ---- MAP PAGE ---- */
+/* ── MAP ── */
 function renderCards(){
   const list=document.getElementById('cardList');
   const filtered=places.filter(p=>state.filter==='전체'||p.cat===state.filter);
   list.innerHTML=filtered.map(p=>{
-    const r=state.ratings[p.id];
-    const sel=state.selected===p.id;
-    const cmts=state.comments[p.id];
+    const r=state.ratings[p.id];const sel=state.selected===p.id;const cmts=state.comments[p.id];
     return`<div class="card ${sel?'selected':''}" data-id="${p.id}">
       <div class="card-body">
-        <div class="card-top">
-          <div><div class="card-name">${p.name}</div><div class="card-desc">${p.desc}</div></div>
-          <span class="badge">${p.cat}</span>
-        </div>
-        <div class="stars" id="stars-${p.id}">
-          ${[1,2,3,4,5].map(i=>`<span class="star ${i<=r?'filled':''}" data-pid="${p.id}" data-val="${i}">★</span>`).join('')}
-          <span class="avg">${r>0?r.toFixed(1)+'점':'평가없음'}</span>
-        </div>
+        <div class="card-top"><div><div class="card-name">${p.name}</div><div class="card-desc">${p.desc}</div></div><span class="badge">${p.cat}</span></div>
+        <div class="stars">${[1,2,3,4,5].map(i=>`<span class="star ${i<=r?'filled':''}" data-pid="${p.id}" data-val="${i}">★</span>`).join('')}<span class="avg">${r>0?r.toFixed(1)+'점':'평가없음'}</span></div>
         <div class="card-addr">${p.addr}</div>
       </div>
-      <div class="comments-section">
-        ${cmts.length===0?`<div class="empty-c">첫 번째 리플을 남겨보세요</div>`:cmts.map(c=>`<div class="comment-item">${c.text}<div class="comment-meta">${c.time}</div></div>`).join('')}
-      </div>
-      <div class="comment-form">
-        <input type="text" id="inp-${p.id}" placeholder="리플 남기기..." maxlength="80">
-        <button data-pid="${p.id}">등록</button>
-      </div>
+      <div class="comments-section">${cmts.length===0?`<div class="empty-c">첫 번째 리플을 남겨보세요</div>`:cmts.map(c=>`<div class="comment-item">${c.text}<div class="comment-meta">${c.time}</div></div>`).join('')}</div>
+      <div class="comment-form"><input type="text" id="inp-${p.id}" placeholder="리플 남기기..." maxlength="80"><button data-pid="${p.id}">등록</button></div>
     </div>`;
   }).join('');
-  bindCardEvents();
-}
-function bindCardEvents(){
   document.querySelectorAll('.card').forEach(card=>{
     card.addEventListener('click',e=>{
-      if(e.target.classList.contains('star'))return;
-      if(e.target.tagName==='BUTTON'||e.target.tagName==='INPUT')return;
-      const pid=parseInt(card.dataset.id);
-      state.selected=state.selected===pid?null:pid;
-      if(state.selected){
-        const p=places.find(x=>x.id===pid);
-        if(p)document.getElementById('mainMap').src=p.mapSrc;
-      }
+      if(e.target.classList.contains('star')||e.target.tagName==='BUTTON'||e.target.tagName==='INPUT')return;
+      const pid=parseInt(card.dataset.id);state.selected=state.selected===pid?null:pid;
+      if(state.selected){const p=places.find(x=>x.id===pid);if(p)document.getElementById('mainMap').src=p.mapSrc;}
       renderCards();
     });
   });
-  document.querySelectorAll('.star').forEach(s=>{
-    s.addEventListener('click',e=>{
-      e.stopPropagation();
-      state.ratings[parseInt(s.dataset.pid)]=parseInt(s.dataset.val);
-      renderCards();
-    });
-  });
+  document.querySelectorAll('.star').forEach(s=>s.addEventListener('click',e=>{e.stopPropagation();state.ratings[parseInt(s.dataset.pid)]=parseInt(s.dataset.val);renderCards();}));
   document.querySelectorAll('.comment-form button').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      e.stopPropagation();
-      const pid=parseInt(btn.dataset.pid);
-      const inp=document.getElementById('inp-'+pid);
-      const txt=inp.value.trim();
-      if(!txt)return;
-      const now=new Date();
-      state.comments[pid].push({text:txt,time:`${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`});
-      inp.value='';
-      renderCards();
-    });
+    btn.addEventListener('click',e=>{e.stopPropagation();addComment(parseInt(btn.dataset.pid),document.getElementById('inp-'+btn.dataset.pid));});
   });
   document.querySelectorAll('.comment-form input').forEach(inp=>{
     inp.addEventListener('click',e=>e.stopPropagation());
-    inp.addEventListener('keydown',e=>{
-      if(e.key!=='Enter')return;
-      const pid=parseInt(inp.id.replace('inp-',''));
-      const txt=inp.value.trim();
-      if(!txt)return;
-      const now=new Date();
-      state.comments[pid].push({text:txt,time:`${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`});
-      inp.value='';
-      renderCards();
-    });
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')addComment(parseInt(inp.id.replace('inp-','')),inp);});
   });
+}
+function addComment(pid,inp){
+  const txt=inp.value.trim();if(!txt)return;
+  const now=new Date();
+  state.comments[pid].push({text:txt,time:`${now.getMonth()+1}/${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`});
+  inp.value='';renderCards();
 }
 document.getElementById('filterBar').addEventListener('click',e=>{
   if(!e.target.classList.contains('tag'))return;
   state.filter=e.target.dataset.cat;
-  document.querySelectorAll('.tag').forEach(t=>t.classList.remove('active'));
-  e.target.classList.add('active');
+  document.querySelectorAll('#filterBar .tag').forEach(t=>t.classList.toggle('active',t.dataset.cat===state.filter));
   renderCards();
 });
 
-/* ---- COURSE PAGE ---- */
+/* ── COURSE ── */
+const MAX_STRIP=4;
+function mediaStripHTML(c){
+  if(!c.media||c.media.length===0)return'';
+  const show=c.media.slice(0,MAX_STRIP);
+  const extra=c.media.length-MAX_STRIP;
+  const thumbs=show.map((m,i)=>{
+    const isLast=i===MAX_STRIP-1&&extra>0;
+    if(m.type==='video'){
+      return`<div class="media-thumb-strip" data-cid="${c.id}" data-idx="${i}">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#2a2a2a;flex-direction:column;gap:4px">
+          <span style="font-size:20px">▶</span>
+          <span style="font-size:9px;color:#aaa">${m.name}</span>
+        </div>
+        <span class="video-badge">동영상</span>
+        ${isLast?`<div class="media-more-badge">+${extra}</div>`:''}
+      </div>`;
+    }
+    return`<div class="media-thumb-strip" data-cid="${c.id}" data-idx="${i}">
+      <img src="${m.url}" alt="${m.name}">
+      ${isLast?`<div class="media-more-badge">+${extra}</div>`:''}
+    </div>`;
+  }).join('');
+  return`<div class="media-strip">
+    <div style="font-size:11px;color:#aaa;margin-bottom:6px">사진·동영상 ${c.media.length}개</div>
+    <div class="media-strip-scroll">${thumbs}</div>
+  </div>`;
+}
+
 function renderCourses(){
   const list=document.getElementById('courseList');
-  if(state.courses.length===0){
-    list.innerHTML=`<div style="text-align:center;padding:40px 16px;color:#bbb;font-size:13px">아직 등록된 코스가 없어요<br>첫 번째 코스를 만들어보세요!</div>`;
-    return;
-  }
+  if(!state.courses.length){list.innerHTML=`<div style="text-align:center;padding:40px;color:#bbb;font-size:13px">아직 코스가 없어요. 첫 번째 코스를 등록해보세요!</div>`;return;}
   list.innerHTML='';
   state.courses.forEach((c,ci)=>{
-    const stopNames=c.placeIds.map(id=>{const p=places.find(x=>x.id===id);return p?p.name:'알 수 없음';});
-    const el=document.createElement('div');
-    el.className='course-card';
+    const stops=c.placeIds.map(id=>{const p=places.find(x=>x.id===id);return p?p.name:'알 수 없음';});
+    const el=document.createElement('div');el.className='course-card';
     el.innerHTML=`
       <div class="course-header" data-ci="${ci}">
-        <div class="course-title">${c.name}</div>
-        <div class="course-meta">
-          ${c.tags.map(t=>`<span class="course-tag">${t}</span>`).join('')}
-          <span class="course-time">⏱ ${c.time}</span>
-          <span class="course-time">☕ 팁 ${c.tips.toLocaleString()}원</span>
+        <div>
+          <div class="course-title">${c.name}</div>
+          <div class="course-meta">
+            ${c.tags.map(t=>`<span class="course-tag">${t}</span>`).join('')}
+            <span class="course-time">⏱ ${c.time}</span>
+            <span class="course-time">☕ 팁 ${c.tips.toLocaleString()}원</span>
+          </div>
         </div>
+        <span class="chevron ${c.open?'open':''}">▼</span>
       </div>
-      ${c.open?`<div class="course-body">
-        <div class="course-desc">${c.desc}</div>
-        <div class="course-stops">
-          ${stopNames.map((n,i)=>`<div class="stop-item"><div class="stop-num">${i+1}</div><span>${n}</span></div>`).join('')}
-        </div>
-        <div class="tip-section">
-          <div class="tip-label">이 코스가 마음에 드셨나요? 크리에이터에게 팁을 보내보세요</div>
-          <div class="tip-amounts">
-            <span class="tip-btn" data-cid="${c.id}" data-amount="1000">1,000원</span>
-            <span class="tip-btn" data-cid="${c.id}" data-amount="2000">2,000원</span>
-            <span class="tip-btn" data-cid="${c.id}" data-amount="3000">3,000원</span>
-            <span class="tip-btn" data-cid="${c.id}" data-amount="5000">5,000원</span>
-            <span class="tip-btn" data-cid="${c.id}" data-amount="10000">10,000원</span>
-          </div>
-          <div style="margin-top:8px">
-            <button class="btn-primary tip-send-btn" data-cid="${c.id}" style="font-size:12px">선물하기</button>
+      ${c.open?`
+        ${mediaStripHTML(c)}
+        <div class="course-body">
+          <div class="course-desc">${c.desc}</div>
+          <div class="course-stops">${stops.map((n,i)=>`<div class="stop-item"><div class="stop-num">${i+1}</div><span>${n}</span></div>`).join('')}</div>
+          <div class="tip-section">
+            <div class="tip-label">이 코스가 마음에 드셨나요? 크리에이터에게 팁을 보내보세요</div>
+            <div class="tip-amounts">${[1000,2000,3000,5000,10000].map(a=>`<span class="tip-btn" data-cid="${c.id}" data-amount="${a}">${a.toLocaleString()}원</span>`).join('')}</div>
+            <div style="margin-top:8px"><button class="btn-primary tip-send-btn" data-cid="${c.id}">선물하기</button></div>
           </div>
         </div>
-      </div>`:''}
+      `:''}
     `;
     list.appendChild(el);
-
-    if(ci===1){
-      const ad=document.createElement('div');
-      ad.className='ad-inline';
-      ad.innerHTML=`<span class="ad-label">AD</span><span style="font-size:12px;color:#666;flex:1">성남 주변 숙소 — 오늘 특가 확인하기</span><span style="font-size:12px;color:#4a7cf5;cursor:pointer">보기 →</span>`;
-      list.appendChild(ad);
-    }
+    if(ci===1){const ad=document.createElement('div');ad.className='ad-inline';ad.innerHTML=`<span class="ad-label">AD</span><span style="font-size:12px;color:#666;flex:1">성남 주변 숙소 — 오늘 특가 확인</span><span style="font-size:12px;color:#4a7cf5;cursor:pointer">보기 →</span>`;list.appendChild(ad);}
   });
-  bindCourseEvents();
-}
-function bindCourseEvents(){
+
   document.querySelectorAll('.course-header').forEach(h=>{
-    h.addEventListener('click',()=>{
-      const ci=parseInt(h.dataset.ci);
-      state.courses[ci].open=!state.courses[ci].open;
-      renderCourses();
-    });
+    h.addEventListener('click',()=>{const ci=parseInt(h.dataset.ci);state.courses[ci].open=!state.courses[ci].open;renderCourses();});
   });
   document.querySelectorAll('.tip-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      e.stopPropagation();
-      document.querySelectorAll(`.tip-btn[data-cid="${btn.dataset.cid}"]`).forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-    });
+    btn.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll(`.tip-btn[data-cid="${btn.dataset.cid}"]`).forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});
   });
   document.querySelectorAll('.tip-send-btn').forEach(btn=>{
     btn.addEventListener('click',e=>{
-      e.stopPropagation();
-      const cid=parseInt(btn.dataset.cid);
-      const selected=document.querySelector(`.tip-btn[data-cid="${cid}"].selected`);
-      if(!selected){alert('금액을 선택해주세요');return;}
-      const amount=parseInt(selected.dataset.amount);
-      state.currentTipCourseId=cid;
-      state.selectedTipAmount=amount;
-      const c=state.courses.find(x=>x.id===cid);
-      document.getElementById('tipCourseName').textContent=`"${c.name}"`;
+      e.stopPropagation();const cid=parseInt(btn.dataset.cid);
+      const sel=document.querySelector(`.tip-btn[data-cid="${cid}"].selected`);
+      if(!sel){alert('금액을 선택해주세요');return;}
+      state.tipCid=cid;state.tipAmt=parseInt(sel.dataset.amount);
+      document.getElementById('tipCourseName').textContent=`"${state.courses.find(x=>x.id===cid).name}"`;
       document.getElementById('tipSuccess').style.display='none';
-      document.getElementById('tipConfirmRow').style.display='flex';
-      document.querySelectorAll('#tipAmounts .tip-btn').forEach(b=>{
-        b.classList.remove('selected');
-        if(parseInt(b.dataset.amount)===amount)b.classList.add('selected');
-      });
+      document.querySelector('#tipModal .modal-footer').style.display='flex';
       document.getElementById('tipModal').classList.add('show');
+    });
+  });
+  /* lightbox on strip thumb */
+  document.querySelectorAll('.media-thumb-strip').forEach(th=>{
+    th.addEventListener('click',e=>{
+      e.stopPropagation();
+      const cid=parseInt(th.dataset.cid);const idx=parseInt(th.dataset.idx);
+      const c=state.courses.find(x=>x.id===cid);if(!c)return;
+      const m=c.media[idx];if(!m)return;
+      openLightbox(m);
     });
   });
 }
 
-/* ---- TIP MODAL ---- */
-document.getElementById('tipCancel').addEventListener('click',()=>{
-  document.getElementById('tipModal').classList.remove('show');
+/* ── LIGHTBOX ── */
+function openLightbox(m){
+  const lbContent=document.getElementById('lbContent');
+  lbContent.innerHTML=m.type==='video'
+    ?`<video class="lb-video" controls autoplay><source src="${m.url}"></video>`
+    :`<img src="${m.url}" alt="${m.name}">`;
+  document.getElementById('lbCap').textContent=m.name;
+  document.getElementById('lightbox').classList.add('show');
+}
+document.getElementById('lbClose').addEventListener('click',()=>{
+  document.getElementById('lightbox').classList.remove('show');
+  const v=document.querySelector('.lb-video');if(v)v.pause();
 });
-document.querySelectorAll('#tipAmounts .tip-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('#tipAmounts .tip-btn').forEach(b=>b.classList.remove('selected'));
-    btn.classList.add('selected');
-    state.selectedTipAmount=parseInt(btn.dataset.amount);
-  });
-});
-document.getElementById('tipSend').addEventListener('click',()=>{
-  const amt=state.selectedTipAmount||document.querySelector('#tipAmounts .tip-btn.selected')?.dataset.amount;
-  if(!amt){alert('금액을 선택해주세요');return;}
-  const cid=state.currentTipCourseId;
-  const c=state.courses.find(x=>x.id===cid);
-  if(c)c.tips+=parseInt(amt);
-  document.getElementById('tipConfirmRow').style.display='none';
-  document.getElementById('tipSuccess').style.display='block';
-  setTimeout(()=>{
-    document.getElementById('tipModal').classList.remove('show');
-    renderCourses();
-  },1800);
+document.getElementById('lightbox').addEventListener('click',e=>{
+  if(e.target===document.getElementById('lightbox')){
+    document.getElementById('lightbox').classList.remove('show');
+    const v=document.querySelector('.lb-video');if(v)v.pause();
+  }
 });
 
-/* ---- REGISTER PAGE ---- */
+/* ── TIP MODAL ── */
+document.getElementById('tipCancel').addEventListener('click',()=>document.getElementById('tipModal').classList.remove('show'));
+document.getElementById('tipSend').addEventListener('click',()=>{
+  const c=state.courses.find(x=>x.id===state.tipCid);if(c&&state.tipAmt)c.tips+=state.tipAmt;
+  document.querySelector('#tipModal .modal-footer').style.display='none';
+  document.getElementById('tipSuccess').style.display='block';
+  setTimeout(()=>{document.getElementById('tipModal').classList.remove('show');renderCourses();},1800);
+});
+
+/* ── REGISTER MEDIA ── */
+function renderPreview(){
+  const grid=document.getElementById('previewGrid');
+  grid.innerHTML=state.regMedia.map((m,i)=>`
+    <div class="preview-item">
+      ${m.type==='video'
+        ?`<video src="${m.url}" muted playsinline style="width:100%;height:100%;object-fit:cover"></video><span class="preview-type-badge">동영상</span>`
+        :`<img src="${m.url}" alt="${m.name}">`}
+      <button class="preview-del" data-idx="${i}">✕</button>
+    </div>`).join('');
+  document.querySelectorAll('.preview-del').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const idx=parseInt(btn.dataset.idx);
+      URL.revokeObjectURL(state.regMedia[idx].url);
+      state.regMedia.splice(idx,1);
+      renderPreview();
+    });
+  });
+}
+
+function simulateUpload(files, type){
+  const container=document.getElementById('progContainer');
+  [...files].forEach(file=>{
+    if(state.regMedia.length>=10){alert('최대 10개까지 업로드할 수 있어요');return;}
+    const pid='p'+Date.now()+Math.random().toString(36).slice(2);
+    const row=document.createElement('div');row.className='upload-progress';row.id=pid;
+    row.innerHTML=`<div class="prog-info"><div class="prog-name">${file.name}</div><div class="prog-bar-wrap"><div class="prog-bar" id="bar-${pid}" style="width:0%"></div></div></div><span class="prog-pct" id="pct-${pid}">0%</span>`;
+    container.appendChild(row);
+    let pct=0;
+    const iv=setInterval(()=>{
+      pct=Math.min(100,pct+Math.floor(Math.random()*15)+8);
+      const bar=document.getElementById('bar-'+pid);if(bar)bar.style.width=pct+'%';
+      const pctEl=document.getElementById('pct-'+pid);if(pctEl)pctEl.textContent=pct+'%';
+      if(pct>=100){
+        clearInterval(iv);
+        const url=URL.createObjectURL(file);
+        state.regMedia.push({url,name:file.name,type});
+        const r=document.getElementById(pid);if(r)r.remove();
+        renderPreview();
+      }
+    },100);
+  });
+}
+
+document.getElementById('uploadZone').addEventListener('click',e=>{
+  if(e.target.id==='addPhotoBtn'||e.target.id==='addVideoBtn')return;
+  document.getElementById('filePhoto').click();
+});
+document.getElementById('addPhotoBtn').addEventListener('click',e=>{e.stopPropagation();document.getElementById('filePhoto').click();});
+document.getElementById('addVideoBtn').addEventListener('click',e=>{e.stopPropagation();document.getElementById('fileVideo').click();});
+
+/* drag & drop */
+const zone=document.getElementById('uploadZone');
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.style.background='#eeeeea';});
+zone.addEventListener('dragleave',()=>{zone.style.background='';});
+zone.addEventListener('drop',e=>{
+  e.preventDefault();zone.style.background='';
+  const files=[...e.dataTransfer.files];
+  const imgs=files.filter(f=>f.type.startsWith('image/'));
+  const vids=files.filter(f=>f.type.startsWith('video/'));
+  if(imgs.length)simulateUpload(imgs,'photo');
+  if(vids.length)simulateUpload(vids,'video');
+});
+
+document.getElementById('filePhoto').addEventListener('change',function(){if(this.files.length)simulateUpload(this.files,'photo');});
+document.getElementById('fileVideo').addEventListener('change',function(){if(this.files.length)simulateUpload(this.files,'video');});
+
+/* ── REGISTER SUBMIT ── */
 function initRegister(){
   const pg=document.getElementById('reg-places');
   pg.innerHTML=places.map(p=>`<span class="check-item" data-pid="${p.id}">${p.name}</span>`).join('');
-  document.querySelectorAll('#reg-places .check-item').forEach(item=>{
-    item.addEventListener('click',()=>item.classList.toggle('checked'));
-  });
-  document.querySelectorAll('#reg-tags .check-item').forEach(item=>{
-    item.addEventListener('click',()=>item.classList.toggle('checked'));
-  });
+  document.querySelectorAll('#reg-places .check-item').forEach(i=>i.addEventListener('click',()=>i.classList.toggle('checked')));
+  document.querySelectorAll('#reg-tags .check-item').forEach(i=>i.addEventListener('click',()=>i.classList.toggle('checked')));
 }
 document.getElementById('reg-submit').addEventListener('click',()=>{
   const name=document.getElementById('reg-name').value.trim();
@@ -507,29 +574,18 @@ document.getElementById('reg-submit').addEventListener('click',()=>{
   const placeIds=[...document.querySelectorAll('#reg-places .check-item.checked')].map(el=>parseInt(el.dataset.pid));
   const tags=[...document.querySelectorAll('#reg-tags .check-item.checked')].map(el=>el.dataset.tag);
   if(!name||!desc||!time||placeIds.length===0){alert('모든 항목을 입력해주세요 (맛집 1개 이상 선택 필수)');return;}
-  state.courses.unshift({id:state.nextCourseId++,name,placeIds,desc,time,tags,tips:0,open:false});
-  document.getElementById('reg-name').value='';
-  document.getElementById('reg-desc').value='';
-  document.getElementById('reg-time').value='';
-  document.querySelectorAll('#reg-places .check-item').forEach(el=>el.classList.remove('checked'));
-  document.querySelectorAll('#reg-tags .check-item').forEach(el=>el.classList.remove('checked'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelector('[data-page="course"]').classList.add('active');
-  document.getElementById('page-course').classList.add('active');
-  renderCourses();
+  state.courses.unshift({id:state.nextId++,name,placeIds,desc,time,tags,tips:0,open:false,media:[...state.regMedia]});
+  // reset
+  document.getElementById('reg-name').value='';document.getElementById('reg-desc').value='';document.getElementById('reg-time').value='';
+  document.querySelectorAll('#reg-places .check-item,#reg-tags .check-item').forEach(el=>el.classList.remove('checked'));
+  state.regMedia.forEach(m=>URL.revokeObjectURL(m.url));state.regMedia=[];
+  renderPreview();
+  goPage('course');renderCourses();
   alert('코스가 등록되었어요!');
 });
-document.getElementById('reg-cancel').addEventListener('click',()=>{
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelector('[data-page="course"]').classList.add('active');
-  document.getElementById('page-course').classList.add('active');
-});
+document.getElementById('reg-cancel').addEventListener('click',()=>goPage('course'));
 
-renderCards();
-renderCourses();
-initRegister();
+renderCards();renderCourses();initRegister();
 </script>
 </body>
 </html>
