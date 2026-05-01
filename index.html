@@ -12,7 +12,7 @@
 <meta property="og:description" content="혼자서도 함께여도 유쾌하게 즐기실 분들 환영!">
 <meta property="og:type" content="website">
 
-<!-- 폰트: Pretendard (한글) + DM Serif Display (포인트) -->
+<!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -30,11 +30,11 @@
     --kakao: #FEE500;
     --kakao-ink: #181600;
     --line: rgba(26,26,26,0.08);
-    --shadow-sm: 0 2px 8px rgba(26,26,26,0.04);
-    --shadow-md: 0 8px 24px rgba(26,26,26,0.08);
-    --shadow-lg: 0 20px 48px rgba(26,26,26,0.12);
-    --radius: 20px;
-    --radius-sm: 12px;
+    --shadow-sm: 0 1px 4px rgba(26,26,26,0.04);
+    --shadow-md: 0 4px 16px rgba(26,26,26,0.08);
+    --shadow-lg: 0 12px 32px rgba(26,26,26,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
     --serif: 'DM Serif Display', 'Pretendard', serif;
     --sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
@@ -50,15 +50,14 @@
     font-family: var(--sans);
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.5;
-    min-height: 100vh;
-    min-height: 100dvh;
-    overflow-x: hidden;
+    line-height: 1.4;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     position: relative;
     font-feature-settings: 'tnum';
   }
 
-  /* 배경 장식 — 그리드 + 노이즈 느낌 */
   body::before {
     content: '';
     position: fixed;
@@ -77,48 +76,48 @@
     background-image:
       linear-gradient(var(--line) 1px, transparent 1px),
       linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-size: 32px 32px;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
     z-index: 0;
   }
 
   .wrap {
     position: relative;
     z-index: 1;
-    max-width: 480px;
+    max-width: 440px;
     margin: 0 auto;
-    padding: 32px 20px 48px;
-    min-height: 100vh;
-    min-height: 100dvh;
+    padding: 16px 16px 12px;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
+    gap: 12px;
   }
 
   /* === HEADER === */
   .header {
     text-align: center;
-    margin-bottom: 28px;
     animation: fadeUp 0.7s ease-out;
   }
 
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
+    gap: 5px;
+    padding: 4px 10px;
     background: var(--ink);
     color: var(--bg);
     border-radius: 100px;
-    font-size: 12px;
+    font-size: 10.5px;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
   }
 
   .badge-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: #4ADE80;
     box-shadow: 0 0 0 0 rgba(74,222,128,0.6);
@@ -127,11 +126,11 @@
 
   .title {
     font-family: var(--serif);
-    font-size: clamp(36px, 9vw, 52px);
-    line-height: 1.05;
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.0;
     letter-spacing: -0.02em;
     color: var(--ink);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .title em {
@@ -140,7 +139,7 @@
   }
 
   .subtitle {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--ink-soft);
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -148,11 +147,11 @@
 
   .age-tag {
     display: inline-block;
-    margin-top: 16px;
-    padding: 4px 10px;
+    margin-top: 8px;
+    padding: 3px 8px;
     background: var(--bg-2);
-    border-radius: 6px;
-    font-size: 13px;
+    border-radius: 5px;
+    font-size: 11.5px;
     font-weight: 600;
     color: var(--carrot-deep);
     letter-spacing: 0.02em;
@@ -160,20 +159,19 @@
 
   /* === KEYWORD CARDS === */
   .keywords {
-    margin: 28px 0 32px;
     display: grid;
-    gap: 10px;
+    gap: 6px;
     animation: fadeUp 0.7s ease-out 0.15s both;
   }
 
   .kw-row {
     background: var(--paper);
     border-radius: var(--radius-sm);
-    padding: 14px 16px;
+    padding: 9px 12px;
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     border: 1px solid var(--line);
     transition: transform 0.2s ease;
   }
@@ -183,41 +181,40 @@
   }
 
   .kw-icon {
-    font-size: 20px;
+    font-size: 15px;
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
     display: grid;
     place-items: center;
     background: var(--bg-2);
-    border-radius: 8px;
+    border-radius: 7px;
   }
 
   .kw-tags {
-    font-size: 13.5px;
+    font-size: 12px;
     color: var(--ink);
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.3;
     letter-spacing: -0.01em;
   }
 
   .kw-tags span {
     color: var(--ink-soft);
-    margin: 0 2px;
+    margin: 0 1px;
   }
 
   /* === TAGLINE === */
   .tagline {
     text-align: center;
-    margin: 8px 0 28px;
     animation: fadeUp 0.7s ease-out 0.3s both;
   }
 
   .tagline-quote {
     font-family: var(--serif);
     font-style: italic;
-    font-size: clamp(20px, 5.5vw, 26px);
-    line-height: 1.35;
+    font-size: clamp(15px, 4.2vw, 19px);
+    line-height: 1.3;
     color: var(--ink);
     letter-spacing: -0.01em;
     position: relative;
@@ -229,24 +226,23 @@
     content: '';
     position: absolute;
     top: 50%;
-    width: 24px;
+    width: 16px;
     height: 1.5px;
     background: var(--carrot);
   }
-  .tagline-quote::before { right: calc(100% + 12px); }
-  .tagline-quote::after { left: calc(100% + 12px); }
+  .tagline-quote::before { right: calc(100% + 8px); }
+  .tagline-quote::after { left: calc(100% + 8px); }
 
   .tagline-sub {
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 4px;
+    font-size: 12px;
     color: var(--ink-soft);
   }
 
-  /* === CTA BUTTONS === */
+  /* === CTA === */
   .cta-group {
     display: grid;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 8px;
     animation: fadeUp 0.7s ease-out 0.45s both;
   }
 
@@ -254,11 +250,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
+    padding: 12px 16px;
     border-radius: var(--radius);
     text-decoration: none;
     font-weight: 700;
-    font-size: 16px;
     letter-spacing: -0.01em;
     box-shadow: var(--shadow-md);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -269,9 +264,7 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .cta:active {
-    transform: scale(0.98);
-  }
+  .cta:active { transform: scale(0.98); }
 
   @media (hover: hover) {
     .cta:hover {
@@ -280,61 +273,51 @@
     }
   }
 
-  .cta-carrot {
-    background: var(--carrot);
-    color: white;
-  }
-
-  .cta-kakao {
-    background: var(--kakao);
-    color: var(--kakao-ink);
-  }
+  .cta-carrot { background: var(--carrot); color: white; }
+  .cta-kakao { background: var(--kakao); color: var(--kakao-ink); }
 
   .cta-left {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 11px;
     flex: 1;
     min-width: 0;
   }
 
   .cta-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    font-size: 22px;
+    font-size: 17px;
   }
 
-  .cta-carrot .cta-logo {
-    background: rgba(255,255,255,0.2);
-  }
-
-  .cta-kakao .cta-logo {
-    background: rgba(0,0,0,0.08);
-  }
+  .cta-carrot .cta-logo { background: rgba(255,255,255,0.2); }
+  .cta-kakao .cta-logo { background: rgba(0,0,0,0.08); }
 
   .cta-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2px;
+    gap: 0;
     min-width: 0;
   }
 
   .cta-label {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     opacity: 0.7;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    line-height: 1.2;
   }
 
   .cta-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
+    line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -342,19 +325,16 @@
   }
 
   .cta-arrow {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: grid;
     place-items: center;
     flex-shrink: 0;
     transition: transform 0.2s ease;
   }
 
-  .cta:hover .cta-arrow {
-    transform: translateX(4px);
-  }
+  .cta:hover .cta-arrow { transform: translateX(4px); }
 
-  /* 빛나는 효과 */
   .cta::after {
     content: '';
     position: absolute;
@@ -362,37 +342,28 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.2),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.6s ease;
   }
-
-  .cta:hover::after {
-    left: 100%;
-  }
+  .cta:hover::after { left: 100%; }
 
   /* === FOOTER === */
   .footer {
     margin-top: auto;
-    padding-top: 24px;
     text-align: center;
     animation: fadeUp 0.7s ease-out 0.6s both;
   }
 
   .footer-divider {
-    width: 32px;
+    width: 24px;
     height: 2px;
     background: var(--ink);
-    margin: 0 auto 16px;
+    margin: 0 auto 8px;
     border-radius: 2px;
   }
 
   .footer-text {
-    font-size: 12px;
+    font-size: 10.5px;
     color: var(--ink-soft);
     letter-spacing: 0.02em;
   }
@@ -404,52 +375,75 @@
 
   /* === ANIMATIONS === */
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.6); }
-    50% { box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+    50% { box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+  }
+
+  /* === 작은 폰 (높이 700px 이하) === */
+  @media (max-height: 700px) {
+    .wrap { gap: 10px; padding: 12px 14px; }
+    .badge { margin-bottom: 8px; }
+    .age-tag { margin-top: 6px; }
+    .title { font-size: clamp(26px, 7.5vw, 36px); }
+    .kw-row { padding: 8px 11px; }
+    .cta { padding: 11px 14px; }
+  }
+
+  @media (max-height: 640px) {
+    .wrap { gap: 8px; padding: 10px 14px 8px; }
+    .keywords { gap: 5px; }
+    .kw-row { padding: 7px 10px; gap: 8px; }
+    .kw-icon { width: 22px; height: 22px; font-size: 13px; }
+    .kw-tags { font-size: 11.5px; }
+    .title { font-size: 26px; }
+    .badge { margin-bottom: 6px; padding: 3px 9px; font-size: 10px; }
+    .footer-divider { margin-bottom: 5px; }
   }
 
   /* === DESKTOP === */
   @media (min-width: 768px) {
+    body { overflow: auto; }
     .wrap {
       max-width: 560px;
-      padding: 64px 32px;
+      padding: 48px 32px;
+      height: auto;
+      min-height: 100vh;
+      gap: 20px;
     }
-
-    .keywords {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .kw-row {
-      padding: 16px 18px;
-    }
-
-    .cta {
-      padding: 22px 28px;
-    }
+    .title { font-size: 56px; line-height: 1.05; margin-bottom: 10px; }
+    .subtitle { font-size: 15px; }
+    .age-tag { font-size: 13px; padding: 4px 10px; margin-top: 14px; }
+    .badge { font-size: 12px; padding: 6px 14px; margin-bottom: 18px; }
+    .keywords { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .kw-row { padding: 14px 16px; gap: 12px; }
+    .kw-icon { width: 32px; height: 32px; font-size: 19px; border-radius: 8px; }
+    .kw-tags { font-size: 13.5px; line-height: 1.4; }
+    .tagline-quote { font-size: 22px; }
+    .tagline-quote::before, .tagline-quote::after { width: 24px; }
+    .tagline-quote::before { right: calc(100% + 12px); }
+    .tagline-quote::after { left: calc(100% + 12px); }
+    .tagline-sub { font-size: 14px; margin-top: 8px; }
+    .cta-group { gap: 12px; }
+    .cta { padding: 18px 24px; border-radius: 20px; }
+    .cta-logo { width: 40px; height: 40px; font-size: 21px; border-radius: 10px; }
+    .cta-label { font-size: 12px; }
+    .cta-title { font-size: 16px; }
+    .footer { padding-top: 16px; }
+    .footer-text { font-size: 12px; }
+    .footer-divider { width: 32px; margin-bottom: 14px; }
   }
 
   @media (min-width: 1024px) {
-    .wrap {
-      max-width: 640px;
-    }
-
-    .title {
-      font-size: 64px;
-    }
+    .wrap { max-width: 640px; padding: 64px 32px; }
+    .title { font-size: 64px; }
   }
 
-  /* 다크모드 대응 (선택) */
+  /* 다크모드 */
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #1A1612;
@@ -462,7 +456,6 @@
     body::after { opacity: 0.2; }
   }
 
-  /* 모션 줄이기 선호 */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -476,7 +469,6 @@
 
 <main class="wrap">
 
-  <!-- HEADER -->
   <header class="header">
     <div class="badge">
       <span class="badge-dot"></span>
@@ -493,7 +485,6 @@
     <div class="age-tag">94~80년생 · 30·40대</div>
   </header>
 
-  <!-- KEYWORDS -->
   <section class="keywords">
     <div class="kw-row">
       <div class="kw-icon">🏃</div>
@@ -513,13 +504,11 @@
     </div>
   </section>
 
-  <!-- TAGLINE -->
   <div class="tagline">
     <p class="tagline-quote">생활체육·음주·독서·육아</p>
     <p class="tagline-sub">관심 있는 활동에만 자유롭게 참여해요</p>
   </div>
 
-  <!-- CTA -->
   <section class="cta-group">
     <a href="#" id="carrot-link" class="cta cta-carrot" aria-label="당근 모임 참여하기">
       <div class="cta-left">
@@ -530,7 +519,7 @@
         </div>
       </div>
       <div class="cta-arrow">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
           <path d="M5 10h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
@@ -545,14 +534,13 @@
         </div>
       </div>
       <div class="cta-arrow">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
           <path d="M5 10h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
     </a>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-divider"></div>
     <p class="footer-text">
